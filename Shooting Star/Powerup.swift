@@ -9,11 +9,18 @@
 import SpriteKit
 
 class Powerup: SKSpriteNode {
-    var weapon:BasicWeapon = SpreaderGun();
-    init() {
-        let tex:SKTexture = SKTexture(imageNamed: "spreaderPowerup");
-        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+    var weapon:BasicWeapon!;
+    init(gun:String) {
+        var tex = SKTexture(imageNamed: "spreaderPowerup");
+
+        if (gun == "Spreader") {
+            weapon = SpreaderGun();
+        } else if (gun == "Waver") {
+            weapon = WaveGun();
+            tex = SKTexture(imageNamed: "WaverGunPowerup");
+        }
         
+        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
         physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2);
         physicsBody?.dynamic = true;
         physicsBody?.categoryBitMask = PhysicsCategory.Powerup;

@@ -8,33 +8,73 @@
 
 import SpriteKit
 
+enum WaveTypes {
+    case Horizontal, SineWave, Vertical
+}
 class EnemyWave: SKNode {
     var ships = [EnemyShip]();
     var waveBonus = 1000;
-    init(scene:SKScene, shipType:String, numShips:Int) {
+    init(scene:SKScene, shipType:String, numShips:Int, waveType:WaveTypes) {
         super.init();
         
         let baseShip = EnemyShip(enemyType: shipType);
         let shipWidth = baseShip.size.width;
-        let startX = scene.size.width + shipWidth;
-        let startY = CGFloat.random(min: baseShip.size.height * 3 / 2, max: scene.size.height - (baseShip.size.height * 3 / 2));
-        for (var i = 0; i < numShips; i+=1) {
-            let newShip = EnemyShip(enemyType: "Monster 7");
-            newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , baseShip.size.height);
+        var startX = scene.size.width + shipWidth;
+        if (waveType == WaveTypes.Horizontal) {
+            let startY = CGFloat.random(min: baseShip.size.height * 3 / 2, max: scene.size.height - (baseShip.size.height * 3 / 2));
+            for (var i = 0; i < numShips; i+=1) {
+                let newShip = EnemyShip(enemyType: "Monster 7");
+                newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , startY);
+                newShip.wave = self;
+                scene.addChild(newShip);
+                let moveX = SKAction.moveToX(-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
+                newShip.runAction(moveX);
+            }
+        } else if (waveType == WaveTypes.SineWave) {
+            for (var i = 0; i < numShips; i+=1) {
+                let newShip = EnemyShip(enemyType: "Monster 7");
+                newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , baseShip.size.height);
             
-            newShip.wave = self;
-            scene.addChild(newShip);
-            let moveX = SKAction.moveToX(-200, duration: 10);
-          
-            let repeatY = SKAction.sequence([SKAction.moveToY(scene.size.height - baseShip.size.height, duration: 2 / 3), SKAction.moveToY(baseShip.size.height, duration: 4 / 3), SKAction.moveToY(scene.size.height - baseShip.size.height, duration: 4 / 3), SKAction.moveToY(baseShip.size.height, duration: 4 / 3), SKAction.moveToY(scene.size.height - baseShip.size.height, duration: 4 / 3), SKAction.moveToY(baseShip.size.height, duration: 4 / 3), SKAction.moveToY(scene.size.height - baseShip.size.height, duration: 4 / 3)]);
-            let sinAction = SKAction.group([moveX, repeatY]);
-            newShip.runAction(sinAction);
-            //newShip.runAction(SKAction.moveByX(-2500, y: 0, duration: 5));
-            ships.append(newShip);
+                newShip.wave = self;
+                scene.addChild(newShip);
+                let topY = scene.size.height * 3 / 4;
+                let botY = scene.size.height / 4;
+                let moveX = SKAction.moveToX(-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
+                let moveTime = 0.66;
+                let moveFromMidToTop = SKAction.moveToY(topY, duration: moveTime / 2);
+                let moveFromTopToBot = SKAction.moveToY(botY, duration: moveTime);
+                let moveFromBotToTop = SKAction.moveToY(topY, duration: moveTime);
+                let moveFromBotToMid = SKAction.moveToY(scene.size.height / 2, duration: moveTime);
+                let repeatY = SKAction.sequence([moveFromMidToTop, moveFromTopToBot, moveFromBotToTop, moveFromTopToBot, moveFromBotToTop, moveFromTopToBot, moveFromBotToTop, moveFromBotToMid]);
+                let sinAction = SKAction.sequence([SKAction.group([moveX, repeatY]), SKAction.removeFromParent()]);
+                newShip.runAction(sinAction);
+                //newShip.runAction(SKAction.moveByX(-2500, y: 0, duration: 5));
+                ships.append(newShip);
+            }
+        } else if (waveType == WaveTypes.Vertical) {
+            let startAtBottom = CGFloat.random() < 0.5;
+            startX = scene.size.width - baseShip.size.width;
+            let startY = startAtBottom ? -baseShip.size.height: scene.size.height + baseShip.size.height;
+            let yDist = startAtBottom ? -baseShip.size.height: baseShip.size.height;
+            let moveXTime = 2.0;
+            let moveYTime = 2.5;
+    
+            for (var i = 0; i < numShips; i+=1) {
+                let newShip = EnemyShip(enemyType: "Monster 7");
+                newShip.position = CGPointMake(startX , startY + yDist * CGFloat(i));
+                scene.addChild(newShip);
+                let moveUp = SKAction.moveToY(scene.size.height + (baseShip.size.height * CGFloat(numShips - i)), duration: moveYTime);
+                let moveDown = SKAction.moveToY(-baseShip.size.height * CGFloat(numShips - i), duration: moveYTime);
+                let moveRight = SKAction.moveByX(-scene.size.width / 4, y: 0, duration: moveXTime);
+                let seq:SKAction!;
+                if (startAtBottom) {
+                    seq = SKAction.sequence([moveUp, moveRight, moveDown, moveRight, moveUp, moveRight, moveDown, SKAction.removeFromParent()]);
+                } else {
+                    seq = SKAction.sequence([moveDown, moveRight, moveUp, moveRight, moveDown, moveRight, moveUp, SKAction.removeFromParent()]);
+                }
+                newShip.runAction(seq);
+            }
         }
-        
-        //Possible sin wave path
-        //group[moveToX(-width / 2), sequence[moveToY(1), moveToY(-1)]);
         
         
     }

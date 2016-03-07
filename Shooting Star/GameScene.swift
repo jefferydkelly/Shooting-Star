@@ -110,7 +110,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         
         for touch in touches {
             let touchLocation = touch.locationInNode(self);
-            
             if (touchLocation.x < size.width / 2 && !alreadyMoved) {
                 spaceship.position = CGPoint(x:spaceship.position.x, y:touchLocation.y);
                 alreadyMoved = true;
@@ -119,7 +118,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     }
    
     func spawnWave() {
-        let wave = EnemyWave(scene: self, shipType: "Monster 1", numShips: 5);
+        let r = round(CGFloat.random(min: 0, max: 2));
+        var wt =  WaveTypes.Horizontal;
+        if (r == 1) {
+            wt = WaveTypes.SineWave;
+        } else if (r == 2) {
+            wt = WaveTypes.Vertical;
+        }
+        let wave = EnemyWave(scene: self, shipType: "Monster 1", numShips: 5, waveType: wt);
         addChild(wave);
     }
     func spawnAsteroid() {
@@ -191,7 +197,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         }
         
         if (CGFloat.random() < 0.1) {
-            let powerup = Powerup();
+            var powerup = Powerup(gun: "Spreader");
+            if (CGFloat.random() < 0.5) {
+                powerup = Powerup(gun: "Waver");
+            }
             powerup.position = enemy.position;
             addChild(powerup);
         }

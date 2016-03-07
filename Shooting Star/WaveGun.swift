@@ -44,18 +44,28 @@ class WaveGun: BasicWeapon {
             bulletTwo.zRotation = pi / 4;
             scene.addChild(bulletTwo);
             
-            let moveXTime = 10.0;
+            let moveXTime = 2.5;
+            let moveUpFirst = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height / 4), duration: moveXTime / 5);
+            let moveDownFirst = moveUpFirst.reversedAction();
+            let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height / 2), duration: moveXTime / 5);
+            let moveDown = moveUp.reversedAction();
+            
             let moveToScreenWidth = SKAction.moveToX(scene.size.width + bullet.size.width, duration: moveXTime);
-            let moveToTopHalf = SKAction.moveToY(scene.size.height - bullet.size.height, duration: 1.0);
-            let moveToTop = SKAction.moveToY(scene.size.height - bullet.size.height, duration: 3.0);
-            let moveToBottomHalf = SKAction.moveToY(bullet.size.height, duration: 1.0);
-            let moveToBottom = SKAction.moveToY(scene.size.height - bullet.size.height, duration: 3.0);
             
-            let bulletOneSequence = SKAction.sequence([moveToTopHalf, moveToBottom, moveToTopHalf, moveToBottom]);
-            bullet.runAction(SKAction.group([moveToScreenWidth, bulletOneSequence]));
-            let bulletTwoSequence = SKAction.sequence([moveToBottomHalf, moveToTop, moveToBottom, moveToTop]);
-            bulletTwo.runAction(SKAction.group([moveToScreenWidth, bulletTwoSequence]));
+            let boSequence = SKAction.sequence([moveDownFirst, moveUp, moveDown, moveUp, moveDown]);
+            let btSequence = SKAction.sequence([moveUpFirst, moveDown, moveUp, moveDown, moveUp]);
             
+            bullet.runAction(SKAction.group([moveToScreenWidth, boSequence]));
+            bulletTwo.runAction(SKAction.group([moveToScreenWidth, btSequence]));
+            
+            canFire = false;
+            let waitAction = SKAction.waitForDuration(coolDown);
+            let resetAction = SKAction.runBlock() {
+                self.canFire = true;
+            };
+            let sequence = SKAction.sequence([waitAction, resetAction]);
+            runAction(sequence);
+
             
         }
     }
