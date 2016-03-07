@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6908D7EC1C8D3A890072EE78 /* WaveGun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6908D7EB1C8D3A890072EE78 /* WaveGun.swift */; };
+		694099E21C889AE30074B5E8 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694099E11C889AE30074B5E8 /* CreditsScene.swift */; };
+		694574E71C88A98500E575CF /* ShootingStar_TutorialTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694574E61C88A98500E575CF /* ShootingStar_TutorialTest.swift */; };
+		6955D1F91C7BAF0400BC37FB /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6955D1F81C7BAF0400BC37FB /* Tutorial.swift */; };
+		697B12F91C850B2200439B42 /* 8-BIT WONDER.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */; };
+		698EB9021C762B2600DB512F /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698EB9011C762B2600DB512F /* MyUtils.swift */; };
+		698EB9041C76343100DB512F /* BasicWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698EB9031C76343100DB512F /* BasicWeapon.swift */; };
+		699BC8E81C7F603E0046671E /* Powerup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BC8E71C7F603E0046671E /* Powerup.swift */; };
+		699BC8EA1C7F60FB0046671E /* SpreaderGun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699BC8E91C7F60FB0046671E /* SpreaderGun.swift */; };
+		69B88A881C760D79002B4E29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88A871C760D79002B4E29 /* AppDelegate.swift */; };
+		69B88A8A1C760D79002B4E29 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 69B88A891C760D79002B4E29 /* GameScene.sks */; };
+		69B88A8C1C760D79002B4E29 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88A8B1C760D79002B4E29 /* GameScene.swift */; };
+		69B88A8E1C760D79002B4E29 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88A8D1C760D79002B4E29 /* GameViewController.swift */; };
+		69B88A911C760D79002B4E29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B88A8F1C760D79002B4E29 /* Main.storyboard */; };
+		69B88A931C760D79002B4E29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69B88A921C760D79002B4E29 /* Assets.xcassets */; };
+		69B88A961C760D79002B4E29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69B88A941C760D79002B4E29 /* LaunchScreen.storyboard */; };
+		69B88AA11C760D79002B4E29 /* Shooting_StarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88AA01C760D79002B4E29 /* Shooting_StarTests.swift */; };
+		69B88AAC1C760D79002B4E29 /* Shooting_StarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88AAB1C760D79002B4E29 /* Shooting_StarUITests.swift */; };
+		69B88ABD1C761985002B4E29 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88ABC1C761985002B4E29 /* MainMenu.swift */; };
+		69B88ABF1C761DAC002B4E29 /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88ABE1C761DAC002B4E29 /* Ship.swift */; };
+		69CFDB8E1C764876003D6EF6 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CFDB8D1C764876003D6EF6 /* GameOver.swift */; };
+		69E0BFF91C83489A00A83712 /* EnemyWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0BFF81C83489A00A83712 /* EnemyWave.swift */; };
+		69E0BFFB1C8348B200A83712 /* EnemyShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0BFFA1C8348B200A83712 /* EnemyShip.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69B88A9D1C760D79002B4E29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B88A7C1C760D79002B4E29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69B88A831C760D79002B4E29;
+			remoteInfo = "Shooting Star";
+		};
+		69B88AA81C760D79002B4E29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B88A7C1C760D79002B4E29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69B88A831C760D79002B4E29;
+			remoteInfo = "Shooting Star";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6908D7EB1C8D3A890072EE78 /* WaveGun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveGun.swift; sourceTree = "<group>"; };
+		694099E11C889AE30074B5E8 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		694574E61C88A98500E575CF /* ShootingStar_TutorialTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootingStar_TutorialTest.swift; sourceTree = "<group>"; };
+		6955D1F81C7BAF0400BC37FB /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
+		697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "8-BIT WONDER.TTF"; sourceTree = "<group>"; };
+		698EB9011C762B2600DB512F /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
+		698EB9031C76343100DB512F /* BasicWeapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicWeapon.swift; sourceTree = "<group>"; };
+		699BC8E71C7F603E0046671E /* Powerup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Powerup.swift; sourceTree = "<group>"; };
+		699BC8E91C7F60FB0046671E /* SpreaderGun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpreaderGun.swift; sourceTree = "<group>"; };
+		69B88A841C760D79002B4E29 /* Shooting Star.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shooting Star.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B88A871C760D79002B4E29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		69B88A891C760D79002B4E29 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		69B88A8B1C760D79002B4E29 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		69B88A8D1C760D79002B4E29 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		69B88A901C760D79002B4E29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		69B88A921C760D79002B4E29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		69B88A951C760D79002B4E29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		69B88A971C760D79002B4E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69B88A9C1C760D79002B4E29 /* Shooting StarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shooting StarTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B88AA01C760D79002B4E29 /* Shooting_StarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shooting_StarTests.swift; sourceTree = "<group>"; };
+		69B88AA21C760D79002B4E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69B88AA71C760D79002B4E29 /* Shooting StarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shooting StarUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69B88AAB1C760D79002B4E29 /* Shooting_StarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shooting_StarUITests.swift; sourceTree = "<group>"; };
+		69B88AAD1C760D79002B4E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69B88ABC1C761985002B4E29 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		69B88ABE1C761DAC002B4E29 /* Ship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
+		69CFDB8D1C764876003D6EF6 /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		69E0BFF81C83489A00A83712 /* EnemyWave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyWave.swift; sourceTree = "<group>"; };
+		69E0BFFA1C8348B200A83712 /* EnemyShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyShip.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69B88A811C760D79002B4E29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88A991C760D79002B4E29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88AA41C760D79002B4E29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69B88A7B1C760D79002B4E29 = {
+			isa = PBXGroup;
+			children = (
+				69B88A861C760D79002B4E29 /* Shooting Star */,
+				69B88A9F1C760D79002B4E29 /* Shooting StarTests */,
+				69B88AAA1C760D79002B4E29 /* Shooting StarUITests */,
+				69B88A851C760D79002B4E29 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		69B88A851C760D79002B4E29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69B88A841C760D79002B4E29 /* Shooting Star.app */,
+				69B88A9C1C760D79002B4E29 /* Shooting StarTests.xctest */,
+				69B88AA71C760D79002B4E29 /* Shooting StarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69B88A861C760D79002B4E29 /* Shooting Star */ = {
+			isa = PBXGroup;
+			children = (
+				697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */,
+				69B88A871C760D79002B4E29 /* AppDelegate.swift */,
+				69B88A8D1C760D79002B4E29 /* GameViewController.swift */,
+				69B88A8F1C760D79002B4E29 /* Main.storyboard */,
+				69B88A921C760D79002B4E29 /* Assets.xcassets */,
+				69B88A941C760D79002B4E29 /* LaunchScreen.storyboard */,
+				69B88A971C760D79002B4E29 /* Info.plist */,
+				69E0BFF81C83489A00A83712 /* EnemyWave.swift */,
+				69E0BFFA1C8348B200A83712 /* EnemyShip.swift */,
+				69B88A891C760D79002B4E29 /* GameScene.sks */,
+				69B88ABB1C761947002B4E29 /* Scenes */,
+				69B88ABE1C761DAC002B4E29 /* Ship.swift */,
+				699BC8E71C7F603E0046671E /* Powerup.swift */,
+				699BC8E91C7F60FB0046671E /* SpreaderGun.swift */,
+				698EB9011C762B2600DB512F /* MyUtils.swift */,
+				698EB9031C76343100DB512F /* BasicWeapon.swift */,
+				6908D7EB1C8D3A890072EE78 /* WaveGun.swift */,
+			);
+			path = "Shooting Star";
+			sourceTree = "<group>";
+		};
+		69B88A9F1C760D79002B4E29 /* Shooting StarTests */ = {
+			isa = PBXGroup;
+			children = (
+				694574E61C88A98500E575CF /* ShootingStar_TutorialTest.swift */,
+				69B88AA01C760D79002B4E29 /* Shooting_StarTests.swift */,
+				69B88AA21C760D79002B4E29 /* Info.plist */,
+			);
+			path = "Shooting StarTests";
+			sourceTree = "<group>";
+		};
+		69B88AAA1C760D79002B4E29 /* Shooting StarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				69B88AAB1C760D79002B4E29 /* Shooting_StarUITests.swift */,
+				69B88AAD1C760D79002B4E29 /* Info.plist */,
+			);
+			path = "Shooting StarUITests";
+			sourceTree = "<group>";
+		};
+		69B88ABB1C761947002B4E29 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				69B88A8B1C760D79002B4E29 /* GameScene.swift */,
+				69B88ABC1C761985002B4E29 /* MainMenu.swift */,
+				69CFDB8D1C764876003D6EF6 /* GameOver.swift */,
+				6955D1F81C7BAF0400BC37FB /* Tutorial.swift */,
+				694099E11C889AE30074B5E8 /* CreditsScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69B88A831C760D79002B4E29 /* Shooting Star */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69B88AB01C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting Star" */;
+			buildPhases = (
+				69B88A801C760D79002B4E29 /* Sources */,
+				69B88A811C760D79002B4E29 /* Frameworks */,
+				69B88A821C760D79002B4E29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Shooting Star";
+			productName = "Shooting Star";
+			productReference = 69B88A841C760D79002B4E29 /* Shooting Star.app */;
+			productType = "com.apple.product-type.application";
+		};
+		69B88A9B1C760D79002B4E29 /* Shooting StarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69B88AB31C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting StarTests" */;
+			buildPhases = (
+				69B88A981C760D79002B4E29 /* Sources */,
+				69B88A991C760D79002B4E29 /* Frameworks */,
+				69B88A9A1C760D79002B4E29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69B88A9E1C760D79002B4E29 /* PBXTargetDependency */,
+			);
+			name = "Shooting StarTests";
+			productName = "Shooting StarTests";
+			productReference = 69B88A9C1C760D79002B4E29 /* Shooting StarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		69B88AA61C760D79002B4E29 /* Shooting StarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69B88AB61C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting StarUITests" */;
+			buildPhases = (
+				69B88AA31C760D79002B4E29 /* Sources */,
+				69B88AA41C760D79002B4E29 /* Frameworks */,
+				69B88AA51C760D79002B4E29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69B88AA91C760D79002B4E29 /* PBXTargetDependency */,
+			);
+			name = "Shooting StarUITests";
+			productName = "Shooting StarUITests";
+			productReference = 69B88AA71C760D79002B4E29 /* Shooting StarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69B88A7C1C760D79002B4E29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Jeffery Kelly";
+				TargetAttributes = {
+					69B88A831C760D79002B4E29 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					69B88A9B1C760D79002B4E29 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 69B88A831C760D79002B4E29;
+					};
+					69B88AA61C760D79002B4E29 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 69B88A831C760D79002B4E29;
+					};
+				};
+			};
+			buildConfigurationList = 69B88A7F1C760D79002B4E29 /* Build configuration list for PBXProject "Shooting Star" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69B88A7B1C760D79002B4E29;
+			productRefGroup = 69B88A851C760D79002B4E29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69B88A831C760D79002B4E29 /* Shooting Star */,
+				69B88A9B1C760D79002B4E29 /* Shooting StarTests */,
+				69B88AA61C760D79002B4E29 /* Shooting StarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69B88A821C760D79002B4E29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B88A8A1C760D79002B4E29 /* GameScene.sks in Resources */,
+				69B88A961C760D79002B4E29 /* LaunchScreen.storyboard in Resources */,
+				69B88A931C760D79002B4E29 /* Assets.xcassets in Resources */,
+				697B12F91C850B2200439B42 /* 8-BIT WONDER.TTF in Resources */,
+				69B88A911C760D79002B4E29 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88A9A1C760D79002B4E29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88AA51C760D79002B4E29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69B88A801C760D79002B4E29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B88A8C1C760D79002B4E29 /* GameScene.swift in Sources */,
+				6955D1F91C7BAF0400BC37FB /* Tutorial.swift in Sources */,
+				698EB9021C762B2600DB512F /* MyUtils.swift in Sources */,
+				694099E21C889AE30074B5E8 /* CreditsScene.swift in Sources */,
+				69B88A8E1C760D79002B4E29 /* GameViewController.swift in Sources */,
+				698EB9041C76343100DB512F /* BasicWeapon.swift in Sources */,
+				69B88A881C760D79002B4E29 /* AppDelegate.swift in Sources */,
+				699BC8E81C7F603E0046671E /* Powerup.swift in Sources */,
+				69E0BFF91C83489A00A83712 /* EnemyWave.swift in Sources */,
+				69B88ABD1C761985002B4E29 /* MainMenu.swift in Sources */,
+				699BC8EA1C7F60FB0046671E /* SpreaderGun.swift in Sources */,
+				69B88ABF1C761DAC002B4E29 /* Ship.swift in Sources */,
+				69E0BFFB1C8348B200A83712 /* EnemyShip.swift in Sources */,
+				6908D7EC1C8D3A890072EE78 /* WaveGun.swift in Sources */,
+				69CFDB8E1C764876003D6EF6 /* GameOver.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88A981C760D79002B4E29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				694574E71C88A98500E575CF /* ShootingStar_TutorialTest.swift in Sources */,
+				69B88AA11C760D79002B4E29 /* Shooting_StarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69B88AA31C760D79002B4E29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B88AAC1C760D79002B4E29 /* Shooting_StarUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69B88A9E1C760D79002B4E29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69B88A831C760D79002B4E29 /* Shooting Star */;
+			targetProxy = 69B88A9D1C760D79002B4E29 /* PBXContainerItemProxy */;
+		};
+		69B88AA91C760D79002B4E29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69B88A831C760D79002B4E29 /* Shooting Star */;
+			targetProxy = 69B88AA81C760D79002B4E29 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		69B88A8F1C760D79002B4E29 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69B88A901C760D79002B4E29 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		69B88A941C760D79002B4E29 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69B88A951C760D79002B4E29 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69B88AAE1C760D79002B4E29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		69B88AAF1C760D79002B4E29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		69B88AB11C760D79002B4E29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Shooting Star/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-Star";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		69B88AB21C760D79002B4E29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Shooting Star/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-Star";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		69B88AB41C760D79002B4E29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "Shooting StarTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-StarTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shooting Star.app/Shooting Star";
+			};
+			name = Debug;
+		};
+		69B88AB51C760D79002B4E29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Shooting StarTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-StarTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shooting Star.app/Shooting Star";
+			};
+			name = Release;
+		};
+		69B88AB71C760D79002B4E29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "Shooting StarUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-StarUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Shooting Star";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		69B88AB81C760D79002B4E29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Shooting StarUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Mobile-Project-Team.Shooting-StarUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Shooting Star";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69B88A7F1C760D79002B4E29 /* Build configuration list for PBXProject "Shooting Star" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B88AAE1C760D79002B4E29 /* Debug */,
+				69B88AAF1C760D79002B4E29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69B88AB01C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting Star" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B88AB11C760D79002B4E29 /* Debug */,
+				69B88AB21C760D79002B4E29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69B88AB31C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting StarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B88AB41C760D79002B4E29 /* Debug */,
+				69B88AB51C760D79002B4E29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69B88AB61C760D79002B4E29 /* Build configuration list for PBXNativeTarget "Shooting StarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69B88AB71C760D79002B4E29 /* Debug */,
+				69B88AB81C760D79002B4E29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69B88A7C1C760D79002B4E29 /* Project object */;
+}

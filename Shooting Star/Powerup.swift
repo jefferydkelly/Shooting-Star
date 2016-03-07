@@ -1,0 +1,28 @@
+//
+//  Powerup.swift
+//  Shooting Star
+//
+//  Created by Jeffery Kelly on 2/25/16.
+//  Copyright © 2016 Jeffery Kelly. All rights reserved.
+//
+
+import SpriteKit
+
+class Powerup: SKSpriteNode {
+    var weapon:BasicWeapon = SpreaderGun();
+    init() {
+        let tex:SKTexture = SKTexture(imageNamed: "spreaderPowerup");
+        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        
+        physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2);
+        physicsBody?.dynamic = true;
+        physicsBody?.categoryBitMask = PhysicsCategory.Powerup;
+        physicsBody?.contactTestBitMask = PhysicsCategory.Player;
+        physicsBody?.collisionBitMask = PhysicsCategory.None;
+        runAction(SKAction.moveToX(-size.width / 2, duration: 4));
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
