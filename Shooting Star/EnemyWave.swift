@@ -29,6 +29,7 @@ class EnemyWave: SKNode {
                 scene.addChild(newShip);
                 let moveX = SKAction.moveToX(-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
                 newShip.runAction(moveX);
+                ships.append(newShip);
             }
         } else if (waveType == WaveTypes.SineWave) {
             for (var i = 0; i < numShips; i+=1) {
@@ -73,6 +74,7 @@ class EnemyWave: SKNode {
                     seq = SKAction.sequence([moveDown, moveRight, moveUp, moveRight, moveDown, moveRight, moveUp, SKAction.removeFromParent()]);
                 }
                 newShip.runAction(seq);
+                ships.append(newShip);
             }
         }
         

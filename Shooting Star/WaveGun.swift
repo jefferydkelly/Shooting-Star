@@ -31,7 +31,7 @@ class WaveGun: BasicWeapon {
             bullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bullet.physicsBody?.collisionBitMask = PhysicsCategory.None;
             
-            bullet.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: ship.size.height / 2);
+            bullet.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: 0);
             scene.addChild(bullet);
             
             let bulletTwo = SKSpriteNode(imageNamed: "bullet");
@@ -40,14 +40,15 @@ class WaveGun: BasicWeapon {
             bulletTwo.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
             bulletTwo.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bulletTwo.physicsBody?.collisionBitMask = PhysicsCategory.None;
-            bulletTwo.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: -ship.size.height / 2);
+            bulletTwo.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: 0);
             bulletTwo.zRotation = pi / 4;
             scene.addChild(bulletTwo);
             
             let moveXTime = 2.5;
-            let moveUpFirst = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height / 4), duration: moveXTime / 5);
+            let yDist = scene.size.height / 4;
+            let moveUpFirst = SKAction.moveBy(CGVector(dx: 0, dy: yDist / 2), duration: moveXTime / 5);
             let moveDownFirst = moveUpFirst.reversedAction();
-            let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height / 2), duration: moveXTime / 5);
+            let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: yDist), duration: moveXTime / 5);
             let moveDown = moveUp.reversedAction();
             
             let moveToScreenWidth = SKAction.moveToX(scene.size.width + bullet.size.width, duration: moveXTime);

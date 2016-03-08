@@ -64,6 +64,13 @@ class Shooting_StarTests: XCTestCase {
         gameScene.spaceship.theScene = gameScene;
         XCTAssertNotNil(gameScene.spaceship.theScene);
     }
+    
+    func test_ShipFire() {
+        let gameScene = GameScene(size: CGSize(width: 1920, height: 1080));
+        gameScene.spaceship.theScene = gameScene;
+        gameScene.spaceship.Fire(gameScene);
+        XCTAssertFalse(gameScene.spaceship.weapon.canFire);
+    }
     func test_WeaponLabelChange() {
         let gameScene = GameScene(size: CGSize(width: 1920, height: 1080));
         gameScene.spaceship.theScene = gameScene;
