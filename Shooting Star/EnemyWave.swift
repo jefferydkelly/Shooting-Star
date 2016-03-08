@@ -14,6 +14,7 @@ enum WaveTypes {
 class EnemyWave: SKNode {
     var ships = [EnemyShip]();
     var waveBonus = 1000;
+   
     init(scene:SKScene, shipType:String, numShips:Int, waveType:WaveTypes) {
         super.init();
         

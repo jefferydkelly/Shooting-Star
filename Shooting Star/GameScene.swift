@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         addChild(wave);
     }
     func spawnAsteroid() {
-        let asteroid = SKSpriteNode(imageNamed: "asteroid");
+        let asteroid = SKSpriteNode(imageNamed: "asteroid1");
         asteroid.position = CGPoint(x:size.width + 16, y: CGFloat.random(min: 0, max: size.height));
      
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
@@ -157,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     func didBeginContact(contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody;
         var secondBody: SKPhysicsBody;
-    
+        
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA;
             secondBody = contact.bodyB;
@@ -165,36 +165,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             firstBody = contact.bodyB;
             secondBody = contact.bodyA;
         }
+        
+        if (firstBody.node != nil && secondBody.node != nil) {
 
-        if ((firstBody.categoryBitMask == PhysicsCategory.Powerup) && (secondBody.categoryBitMask == PhysicsCategory.Player)) {
-            shipDidCollideWithPowerup(firstBody.node as! Powerup);
-        } else if ((firstBody.categoryBitMask == PhysicsCategory.Enemy) &&
-            (secondBody.categoryBitMask == PhysicsCategory.Projectile)) {
-                projectileDidCollideWithEnemy(firstBody.node as! SKSpriteNode, projectile: secondBody.node as! SKSpriteNode);
+            if ((firstBody.categoryBitMask == PhysicsCategory.Powerup) && (secondBody.categoryBitMask == PhysicsCategory.Player)) {
+                shipDidCollideWithPowerup(firstBody.node as! Powerup);
+            } else if ((firstBody.categoryBitMask == PhysicsCategory.Enemy) &&
+                (secondBody.categoryBitMask == PhysicsCategory.Projectile)) {
+                    projectileDidCollideWithEnemy(firstBody.node as! SKSpriteNode, projectile: secondBody.node as! SKSpriteNode);
                 
-        } else if ((firstBody.categoryBitMask == PhysicsCategory.Enemy) &&
-            (secondBody.categoryBitMask == PhysicsCategory.Player)) {
-                shipDidCollideWithEnemy(firstBody.node as! SKSpriteNode, ship: secondBody.node as! SKSpriteNode);
+            } else if ((firstBody.categoryBitMask == PhysicsCategory.Enemy) &&
+                (secondBody.categoryBitMask == PhysicsCategory.Player)) {
+                    shipDidCollideWithEnemy(firstBody.node as! SKSpriteNode, ship: secondBody.node as! SKSpriteNode);
+            }
         }
     }
     func projectileDidCollideWithEnemy(enemy:SKSpriteNode, projectile:SKSpriteNode) {
         
-        enemy.name = "toRemove";
-        projectile.name = "toRemove";
+        //enemy.name = "toRemove";
+        //projectile.name = "toRemove";
         score += 100;
         if (enemy is EnemyShip) {
-        
-            if let wave = (enemy as! EnemyShip).wave {
+            let eship = (enemy as! EnemyShip);
+            eship.dead = true;
+            if let wave = eship.wave {
                 
                 if (wave.RemoveShip(enemy as! EnemyShip)) {
-                    print("Bonus time");
                     score += wave.waveBonus;
-                    wave.name = "toRemove";
+                    //wave.name = "toRemove";
+                    wave.removeFromParent();
                 }
             }
             
             
         }
+        
+        enemy.removeFromParent();
+        projectile.removeFromParent();
         
         if (CGFloat.random() < 0.1) {
             var powerup = Powerup(gun: "Spreader");
@@ -208,10 +215,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     }
     
     func shipDidCollideWithEnemy(enemy:SKSpriteNode, ship: SKSpriteNode) {
-        enemy.name = "toRemove";
+        //enemy.name = "toRemove";
         
         if (spaceship.weapon.weaponName == "Basic") {
-            ship.name = "toRemove";
+            //ship.name = "toRemove";
+            ship.removeFromParent();
             shipAlive = false;
             livesRemaining -= 1;
           
@@ -235,7 +243,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     
     func shipDidCollideWithPowerup(powerup: Powerup) {
         spaceship.ChangeWeapon(powerup.weapon);
-        powerup.name = "toRemove";
+        //powerup.name = "toRemove";
+        powerup.removeFromParent();
         
     }
     override func update(currentTime: CFTimeInterval) {

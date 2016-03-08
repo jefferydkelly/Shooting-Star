@@ -58,6 +58,26 @@ class MainMenu: SKScene {
         }
     }
     
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return;
+        }
+        startButton.fontColor = SKColor.whiteColor();
+        tutorialButton.fontColor = SKColor.whiteColor();
+        creditsButton.fontColor = SKColor.whiteColor();
+
+        let touchLocation = touch.locationInNode(self);
+        let touchedNode = self.nodeAtPoint(touchLocation);
+        
+        if (touchedNode == startButton) {
+            startButton.fontColor = SKColor.redColor();
+        } else if (touchedNode == tutorialButton) {
+            tutorialButton.fontColor = SKColor.redColor();
+        } else if (touchedNode == creditsButton) {
+            creditsButton.fontColor = SKColor.redColor();
+        }
+    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         guard let touch = touches.first else {
             return;

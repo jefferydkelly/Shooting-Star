@@ -11,6 +11,7 @@ import SpriteKit
 class EnemyShip: SKSpriteNode {
     var wave:EnemyWave?;
     var pointValue = 100;
+    var dead = false;
     init(enemyType: String) {
         let tex = SKTexture(imageNamed: enemyType);
         super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
