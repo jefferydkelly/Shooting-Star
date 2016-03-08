@@ -48,7 +48,7 @@ class SpreaderGun: BasicWeapon {
             bulletTwo.zRotation = pi / 4;
             scene.addChild(bulletTwo);
             
-            let moveActionTwo = SKAction.moveBy(CGVector(dx: 2000, dy: 2000), duration: 4);
+            let moveActionTwo = SKAction.moveBy(CGVector(dx: 2000, dy: 1000), duration: 4);
             bulletTwo.runAction(SKAction.sequence([moveActionTwo, removeAction]));
             
             let bulletThree = SKSpriteNode(imageNamed: "bullet");
@@ -60,7 +60,7 @@ class SpreaderGun: BasicWeapon {
             bulletThree.position = bulletPosition;
             bulletThree.zRotation = -pi / 4;
             scene.addChild(bulletThree);
-            let moveActionThree = SKAction.moveBy(CGVector(dx: 2000, dy: -2000), duration: 4);
+            let moveActionThree = SKAction.moveBy(CGVector(dx: 2000, dy: -1000), duration: 4);
             bulletThree.runAction(SKAction.sequence([moveActionThree, removeAction]));
             
             

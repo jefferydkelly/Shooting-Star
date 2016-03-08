@@ -66,8 +66,18 @@ class WaveGun: BasicWeapon {
             };
             let sequence = SKAction.sequence([waitAction, resetAction]);
             runAction(sequence);
-
             
+            let bulletThree = SKSpriteNode(imageNamed: "bullet");
+            bulletThree.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
+            bulletThree.physicsBody?.dynamic = true;
+            bulletThree.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
+            bulletThree.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
+            bulletThree.physicsBody?.collisionBitMask = PhysicsCategory.None;
+            bulletThree.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: 0);
+
+            bulletThree.position = ship.position + CGPoint(x:(ship.size.width + bullet.size.width) / 2, y: 0);
+            scene.addChild(bulletThree);
+            bulletThree.runAction(SKAction.sequence([moveToScreenWidth, SKAction.removeFromParent()]));
         }
     }
 

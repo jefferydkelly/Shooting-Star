@@ -17,25 +17,25 @@ class MainMenu: SKScene {
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor();
         titleLabel.text = "Shooting Star";
-        titleLabel.position = CGPoint(x: size.width / 2, y: size.height - 250);
+        titleLabel.position = CGPoint(x: size.width / 2, y: size.height * 3 / 4);
         titleLabel.fontColor = SKColor.whiteColor();
         titleLabel.fontSize = 40;
         addChild(titleLabel);
         
         startButton.text = "Start Game";
-        startButton.position = CGPoint(x: size.width / 2, y: 425);
+        startButton.position = CGPoint(x: size.width / 2, y: size.height / 2);
         startButton.fontColor = SKColor.whiteColor();
         startButton.fontSize = 40;
         addChild(startButton);
         
         tutorialButton.text = "Tutorial";
-        tutorialButton.position = CGPoint(x: size.width / 2, y: 350);
+        tutorialButton.position = CGPoint(x: size.width / 2, y: size.height * 3 / 8);
         tutorialButton.fontColor = SKColor.whiteColor();
         tutorialButton.fontSize = 40;
         addChild(tutorialButton);
         
         creditsButton.text = "Credits";
-        creditsButton.position = CGPointMake(size.width / 2, 275);
+        creditsButton.position = CGPointMake(size.width / 2, size.height / 4);
         creditsButton.fontColor = SKColor.whiteColor();
         creditsButton.fontSize = 40;
         addChild(creditsButton);
@@ -46,6 +46,25 @@ class MainMenu: SKScene {
             return;
         }
         
+        let touchLocation = touch.locationInNode(self);
+        let touchedNode = self.nodeAtPoint(touchLocation);
+        
+        if (touchedNode == startButton) {
+            startButton.fontColor = SKColor.redColor();
+        } else if (touchedNode == tutorialButton) {
+            tutorialButton.fontColor = SKColor.redColor();
+        } else if (touchedNode == creditsButton) {
+            creditsButton.fontColor = SKColor.redColor();
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return;
+        }
+        startButton.fontColor = SKColor.whiteColor();
+        tutorialButton.fontColor = SKColor.whiteColor();
+        creditsButton.fontColor = SKColor.whiteColor();
         let touchLocation = touch.locationInNode(self);
         let touchedNode = self.nodeAtPoint(touchLocation);
         

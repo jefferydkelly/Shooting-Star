@@ -12,6 +12,7 @@ class CreditsScene: SKScene {
     let creditsLabel = SKLabelNode(fontNamed: gameFont);
     let jdLabel = SKLabelNode(fontNamed: gameFont);
     let nashLabel = SKLabelNode(fontNamed: gameFont);
+    let fontCredit = SKLabelNode(fontNamed: gameFont);
     let menuButton = SKLabelNode(fontNamed: gameFont);
     
     override func didMoveToView(view: SKView) {
@@ -31,13 +32,19 @@ class CreditsScene: SKScene {
         nashLabel.text = "Nishit Savla - Art";
         nashLabel.fontColor = SKColor.whiteColor();
         nashLabel.fontSize = 24;
-        nashLabel.position = CGPointMake(size.width / 2, size.height / 2);
+        nashLabel.position = CGPointMake(size.width / 2, size.height * 5 / 8 );
         addChild(nashLabel);
+        
+        fontCredit.text = "8Bit-Wonder Font by Joiyo Hatgaya";
+        fontCredit.fontColor = SKColor.whiteColor();
+        fontCredit.fontSize = 24;
+        fontCredit.position = CGPointMake(size.width / 2, size.height / 2);
+        addChild(fontCredit);
         
         menuButton.text = "Return to Main Menu";
         menuButton.fontColor = SKColor.whiteColor();
         menuButton.fontSize = 40;
-        menuButton.position = CGPointMake(size.width / 2, size.height / 4);
+        menuButton.position = CGPointMake(size.width / 2, size.height / 8);
         addChild(menuButton);
         
     }
