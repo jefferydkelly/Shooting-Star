@@ -56,6 +56,9 @@ class GameOver: SKScene {
         let touchLocation = touch.locationInNode(self);
         let touchedNode = self.nodeAtPoint(touchLocation);
         
+        mainMenuButton.fontColor = SKColor.whiteColor();
+        restartButton.fontColor = SKColor.whiteColor();
+        
         if (touchedNode == mainMenuButton) {
             mainMenuButton.fontColor = SKColor.redColor();
         } else if (touchedNode == restartButton) {

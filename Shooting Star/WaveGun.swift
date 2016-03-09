@@ -45,7 +45,7 @@ class WaveGun: BasicWeapon {
             scene.addChild(bulletTwo);
             
             let moveXTime = 2.5;
-            let yDist = scene.size.height / 4;
+            let yDist = scene.size.height / 8;
             let moveUpFirst = SKAction.moveBy(CGVector(dx: 0, dy: yDist / 2), duration: moveXTime / 5);
             let moveDownFirst = moveUpFirst.reversedAction();
             let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: yDist), duration: moveXTime / 5);
