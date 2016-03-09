@@ -58,6 +58,34 @@ class CreditsScene: SKScene {
         let touchedNode = self.nodeAtPoint(touchLocation);
         
         if (touchedNode == menuButton) {
+            menuButton.fontColor = SKColor.redColor();
+        }
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return;
+        }
+        
+        let touchLocation = touch.locationInNode(self);
+        let touchedNode = self.nodeAtPoint(touchLocation);
+        
+        if (touchedNode == menuButton) {
+            menuButton.fontColor = SKColor.redColor();
+        } else {
+            menuButton.fontColor = SKColor.whiteColor();
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return;
+        }
+        
+        let touchLocation = touch.locationInNode(self);
+        let touchedNode = self.nodeAtPoint(touchLocation);
+        
+        if (touchedNode == menuButton) {
             let gameScene = MainMenu(size: size);
             view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
         }
