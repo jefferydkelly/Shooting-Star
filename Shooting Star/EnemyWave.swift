@@ -18,13 +18,13 @@ class EnemyWave: SKNode {
     init(scene:SKScene, shipType:String, numShips:Int, waveType:WaveTypes) {
         super.init();
         
-        let baseShip = EnemyShip(enemyType: shipType);
+        let baseShip = EnemyShip(enemyType: shipType, theScene: scene);
         let shipWidth = baseShip.size.width;
         var startX = scene.size.width + shipWidth;
         if (waveType == WaveTypes.Horizontal) {
             let startY = CGFloat.random(min: baseShip.size.height * 3 / 2, max: scene.size.height - (baseShip.size.height * 3 / 2));
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7");
+                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
                 newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , startY);
                 newShip.wave = self;
                 scene.addChild(newShip);
@@ -34,7 +34,7 @@ class EnemyWave: SKNode {
             }
         } else if (waveType == WaveTypes.SineWave) {
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7");
+                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
                 newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , baseShip.size.height);
             
                 newShip.wave = self;
@@ -60,13 +60,13 @@ class EnemyWave: SKNode {
             let yDist = startAtBottom ? -baseShip.size.height: baseShip.size.height;
             let moveXTime = 2.0;
             let moveYTime = 2.5;
-    
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7");
+                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
                 newShip.position = CGPointMake(startX , startY + yDist * CGFloat(i));
                 scene.addChild(newShip);
-                let moveUp = SKAction.moveToY(scene.size.height + (baseShip.size.height * CGFloat(numShips - i)), duration: moveYTime);
-                let moveDown = SKAction.moveToY(-baseShip.size.height * CGFloat(numShips - i), duration: moveYTime);
+              
+                let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height * 1.5), duration: moveYTime);
+                let moveDown = moveUp.reversedAction();
                 let moveRight = SKAction.moveByX(-scene.size.width / 4, y: 0, duration: moveXTime);
                 let seq:SKAction!;
                 if (startAtBottom) {

@@ -125,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         } else if (r == 2) {
             wt = WaveTypes.Vertical;
         }
+    
         let wave = EnemyWave(scene: self, shipType: "Monster 1", numShips: 5, waveType: wt);
         addChild(wave);
     }
