@@ -9,12 +9,26 @@
 import SpriteKit
 
 let gameFont = "8BIT WONDER";
-class MainMenu: SKScene {
+var playableRect:CGRect = CGRect(origin: CGPoint.zero, size: CGSize.zero);
+let gameTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0);
+
+class MainMenu: SKScene, UIGestureRecognizerDelegate {
     let titleLabel = SKLabelNode(fontNamed: gameFont);
     let startButton = SKLabelNode(fontNamed: gameFont);
     let tutorialButton = SKLabelNode(fontNamed: gameFont);
     let creditsButton = SKLabelNode(fontNamed: gameFont);
     override func didMoveToView(view: SKView) {
+        let maxAspectRatio:CGFloat = 16.0/9.0
+        let playableHeight = size.width / maxAspectRatio
+        let playableMargin = (size.height-playableHeight)/2.0
+        playableRect = CGRect(x: 0, y: playableMargin,
+            width: size.width,
+            height: playableHeight)
+        
+        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        tap.delegate = self;
+        view.addGestureRecognizer(tap);
+        
         backgroundColor = SKColor.blackColor();
         titleLabel.text = "Shooting Star";
         titleLabel.position = CGPoint(x: size.width / 2, y: size.height * 3 / 4);
@@ -79,24 +93,42 @@ class MainMenu: SKScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        guard let touch = touches.first else {
-            return;
-        }
+        
         startButton.fontColor = SKColor.whiteColor();
         tutorialButton.fontColor = SKColor.whiteColor();
         creditsButton.fontColor = SKColor.whiteColor();
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        for touch in touches {
+            let touchLocation = touch.locationInNode(self);
+            let touchedNode = self.nodeAtPoint(touchLocation);
         
-        if (touchedNode == startButton) {
+            if (touchedNode == startButton) {
+                let gameScene = GameScene(size: size);
+                view?.presentScene(gameScene, transition: gameTransition);
+            } else if (touchedNode == tutorialButton) {
+                let gameScene = Tutorial(size: size);
+                view?.presentScene(gameScene, transition: gameTransition);
+            } else if (touchedNode == creditsButton) {
+                let gameScene = CreditsScene(size: size);
+                view?.presentScene(gameScene, transition: gameTransition);
+            }
+        }
+    }
+    
+    // MARK: Gesture Handling
+    func tapDetected(sender:UITapGestureRecognizer) {
+        
+        
+        let tappedNode = self.nodeAtPoint(self.convertPointFromView(sender.locationOfTouch(0, inView: view!)));
+        
+        if (tappedNode == startButton) {
             let gameScene = GameScene(size: size);
-            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
-        } else if (touchedNode == tutorialButton) {
+            view?.presentScene(gameScene, transition: gameTransition);
+        } else if (tappedNode == tutorialButton) {
             let gameScene = Tutorial(size: size);
-            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
-        } else if (touchedNode == creditsButton) {
+            view?.presentScene(gameScene, transition: gameTransition);
+        } else if (tappedNode == creditsButton) {
             let gameScene = CreditsScene(size: size);
-            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
+            view?.presentScene(gameScene, transition: gameTransition);
         }
     }
 }

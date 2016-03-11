@@ -8,7 +8,7 @@
 
 import SpriteKit;
 
-class CreditsScene: SKScene {
+class CreditsScene: SKScene, UIGestureRecognizerDelegate {
     let creditsLabel = SKLabelNode(fontNamed: gameFont);
     let jdLabel = SKLabelNode(fontNamed: gameFont);
     let nashLabel = SKLabelNode(fontNamed: gameFont);
@@ -47,6 +47,9 @@ class CreditsScene: SKScene {
         menuButton.position = CGPointMake(size.width / 2, size.height / 8);
         addChild(menuButton);
         
+        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        tap.delegate = self;
+        view.addGestureRecognizer(tap);
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -90,6 +93,17 @@ class CreditsScene: SKScene {
             view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
         }
     }
+    
+    // MARK: Gesture Handling
+    func tapDetected(sender:UITapGestureRecognizer) {
+        let tappedNode = self.nodeAtPoint(self.convertPointFromView(sender.locationOfTouch(0, inView: view!)));
+        if (tappedNode == menuButton) {
+            let gameScene = MainMenu(size: size);
+            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
+        }
+    }
+    
+    
 
     
 }

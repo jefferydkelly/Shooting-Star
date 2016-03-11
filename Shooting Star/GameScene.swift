@@ -97,9 +97,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         for touch in touches {
             let touchLocation = touch.locationInNode(self);
             
-            if (touchLocation.x < size.width / 2 && !alreadyMoved) {
-                spaceship.position = CGPoint(x:spaceship.position.x, y:touchLocation.y);
-                alreadyMoved = true;
+            if (touchLocation.x < playableRect.size.width / 2 && !alreadyMoved) {
+                if (touchLocation.y >= playableRect.minY + spaceship.size.height / 2 && touchLocation.y <= playableRect.maxY - spaceship.size.height) {
+                    spaceship.position = CGPoint(x:spaceship.position.x, y:touchLocation.y);
+                    alreadyMoved = true;
+                }
             }
         }
     

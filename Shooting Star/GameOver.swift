@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameOver: SKScene {
+class GameOver: SKScene, UIGestureRecognizerDelegate {
     let gameOverLabel = SKLabelNode(fontNamed: gameFont);
     let mainMenuButton = SKLabelNode(fontNamed: gameFont);
     let restartButton = SKLabelNode(fontNamed: gameFont);
@@ -31,6 +31,10 @@ class GameOver: SKScene {
         restartButton.fontColor = SKColor.whiteColor();
         restartButton.position = CGPoint(x: size.width / 2, y: 100);
         addChild(restartButton);
+        
+        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        tap.delegate = self;
+        view.addGestureRecognizer(tap);
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -66,24 +70,42 @@ class GameOver: SKScene {
         }
     }
 
-    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        guard let touch = touches.first else {
-            return;
+        for touch in touches {
+        
+            let touchLocation = touch.locationInNode(self);
+            let touchedNode = self.nodeAtPoint(touchLocation);
+        
+            if (touchedNode == mainMenuButton) {
+                mainMenuButton.fontColor = SKColor.redColor();
+                restartButton.fontColor = SKColor.whiteColor();
+                let gameScene = MainMenu(size:size);
+                view?.presentScene(gameScene, transition: gameTransition);
+            } else if (touchedNode == restartButton) {
+                mainMenuButton.fontColor = SKColor.whiteColor();
+                restartButton.fontColor = SKColor.redColor();
+                view?.presentScene(GameScene(size: size), transition: gameTransition);
+            } else {
+                mainMenuButton.fontColor = SKColor.whiteColor();
+                restartButton.fontColor = SKColor.whiteColor();
+            }
         }
+    }
+    
+    // MARK: Gesture Handling
+    func tapDetected(sender:UITapGestureRecognizer) {
         
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
         
-        if (touchedNode == mainMenuButton) {
+        let tappedNode = self.nodeAtPoint(self.convertPointFromView(sender.locationOfTouch(0, inView: view!)));
+        if (tappedNode == mainMenuButton) {
             mainMenuButton.fontColor = SKColor.redColor();
             restartButton.fontColor = SKColor.whiteColor();
-        } else if (touchedNode == restartButton) {
+            let gameScene = MainMenu(size:size);
+            view?.presentScene(gameScene, transition: gameTransition);
+        } else if (tappedNode == restartButton) {
             mainMenuButton.fontColor = SKColor.whiteColor();
             restartButton.fontColor = SKColor.redColor();
-        } else {
-            mainMenuButton.fontColor = SKColor.whiteColor();
-            restartButton.fontColor = SKColor.whiteColor();
+            view?.presentScene(GameScene(size: size), transition: gameTransition);
         }
     }
 }
