@@ -58,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     
     var weaponLabel = SKLabelNode(fontNamed: gameFont);
     let standardFontSize = CGFloat(48);
+    let emitterActions = SKAction.sequence([SKAction.waitForDuration(0.25), SKAction.removeFromParent()]);
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor();
         let uiY = size.height - 100;
@@ -213,6 +214,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         if (enemy is EnemyShip) {
             let eship = (enemy as! EnemyShip);
             eship.dead = true;
+            if let emitter = SKEmitterNode(fileNamed: "SparkParticles") {
+                print("Sparking");
+                emitter.position = eship.position;
+                addChild(emitter);
+                emitter.runAction(emitterActions);
+            }
             if let wave = eship.wave {
                 
                 if (wave.RemoveShip(enemy as! EnemyShip)) {

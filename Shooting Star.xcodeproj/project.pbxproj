@@ -10,6 +10,8 @@
 		6908D7EC1C8D3A890072EE78 /* WaveGun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6908D7EB1C8D3A890072EE78 /* WaveGun.swift */; };
 		694099E21C889AE30074B5E8 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694099E11C889AE30074B5E8 /* CreditsScene.swift */; };
 		694574E71C88A98500E575CF /* ShootingStar_TutorialTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694574E61C88A98500E575CF /* ShootingStar_TutorialTest.swift */; };
+		6948E5751C98675A007EDA79 /* SparkParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6948E5731C98675A007EDA79 /* SparkParticles.sks */; };
+		6948E5761C98675A007EDA79 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6948E5741C98675A007EDA79 /* spark.png */; };
 		6955D1F91C7BAF0400BC37FB /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6955D1F81C7BAF0400BC37FB /* Tutorial.swift */; };
 		697B12F91C850B2200439B42 /* 8-BIT WONDER.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */; };
 		698EB9021C762B2600DB512F /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698EB9011C762B2600DB512F /* MyUtils.swift */; };
@@ -55,6 +57,8 @@
 		6908D7EB1C8D3A890072EE78 /* WaveGun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveGun.swift; sourceTree = "<group>"; };
 		694099E11C889AE30074B5E8 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		694574E61C88A98500E575CF /* ShootingStar_TutorialTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShootingStar_TutorialTest.swift; sourceTree = "<group>"; };
+		6948E5731C98675A007EDA79 /* SparkParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkParticles.sks; sourceTree = "<group>"; };
+		6948E5741C98675A007EDA79 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		6955D1F81C7BAF0400BC37FB /* Tutorial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
 		697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "8-BIT WONDER.TTF"; sourceTree = "<group>"; };
 		698EB9011C762B2600DB512F /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 				698EB9011C762B2600DB512F /* MyUtils.swift */,
 				69DC78E31C984C3C00FD7B13 /* Weapons */,
 				69DC78E11C9847F600FD7B13 /* DefaultsManager.swift */,
+				6948E5731C98675A007EDA79 /* SparkParticles.sks */,
+				6948E5741C98675A007EDA79 /* spark.png */,
 			);
 			path = "Shooting Star";
 			sourceTree = "<group>";
@@ -309,8 +315,10 @@
 			files = (
 				69E45B8B1C95CFD8006058E1 /* blaster-fire.wav in Resources */,
 				69B88A8A1C760D79002B4E29 /* GameScene.sks in Resources */,
+				6948E5751C98675A007EDA79 /* SparkParticles.sks in Resources */,
 				69B88A961C760D79002B4E29 /* LaunchScreen.storyboard in Resources */,
 				69B88A931C760D79002B4E29 /* Assets.xcassets in Resources */,
+				6948E5761C98675A007EDA79 /* spark.png in Resources */,
 				697B12F91C850B2200439B42 /* 8-BIT WONDER.TTF in Resources */,
 				69B88A911C760D79002B4E29 /* Main.storyboard in Resources */,
 			);
