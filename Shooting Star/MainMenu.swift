@@ -9,6 +9,7 @@
 import SpriteKit
 
 let gameFont = "8BIT WONDER";
+
 var playableRect:CGRect = CGRect(origin: CGPoint.zero, size: CGSize.zero);
 let gameTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0);
 
@@ -17,13 +18,27 @@ class MainMenu: SKScene, UIGestureRecognizerDelegate {
     let startButton = SKLabelNode(fontNamed: gameFont);
     let tutorialButton = SKLabelNode(fontNamed: gameFont);
     let creditsButton = SKLabelNode(fontNamed: gameFont);
-    override func didMoveToView(view: SKView) {
-        let maxAspectRatio:CGFloat = 16.0/9.0
-        let playableHeight = size.width / maxAspectRatio
-        let playableMargin = (size.height-playableHeight)/2.0
+    let standardFontSize = CGFloat(60);
+    override init(size: CGSize) {
+        super.init(size: size);
+        print("Size: \(size)");
+        let maxAspectRatio:CGFloat = 16.0/9.0;
+        let playableHeight = size.width / maxAspectRatio;
+        print(playableHeight);
+        let playableMargin = (size.height-playableHeight)/2.0;
+        print(playableMargin);
         playableRect = CGRect(x: 0, y: playableMargin,
             width: size.width,
-            height: playableHeight)
+            height: playableHeight);
+        print(playableRect.minY);
+        print(playableRect.maxY);
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didMoveToView(view: SKView) {
         
         let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
         tap.delegate = self;
@@ -33,25 +48,25 @@ class MainMenu: SKScene, UIGestureRecognizerDelegate {
         titleLabel.text = "Shooting Star";
         titleLabel.position = CGPoint(x: size.width / 2, y: size.height * 3 / 4);
         titleLabel.fontColor = SKColor.whiteColor();
-        titleLabel.fontSize = 40;
+        titleLabel.fontSize = standardFontSize;
         addChild(titleLabel);
         
         startButton.text = "Start Game";
         startButton.position = CGPoint(x: size.width / 2, y: size.height / 2);
         startButton.fontColor = SKColor.whiteColor();
-        startButton.fontSize = 40;
+        startButton.fontSize = standardFontSize;
         addChild(startButton);
         
         tutorialButton.text = "Tutorial";
         tutorialButton.position = CGPoint(x: size.width / 2, y: size.height * 3 / 8);
         tutorialButton.fontColor = SKColor.whiteColor();
-        tutorialButton.fontSize = 40;
+        tutorialButton.fontSize = standardFontSize;
         addChild(tutorialButton);
         
         creditsButton.text = "Credits";
         creditsButton.position = CGPointMake(size.width / 2, size.height / 4);
         creditsButton.fontColor = SKColor.whiteColor();
-        creditsButton.fontSize = 40;
+        creditsButton.fontSize = standardFontSize;
         addChild(creditsButton);
     }
     

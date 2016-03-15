@@ -40,7 +40,8 @@ class BasicWeapon: SKNode {
             let resetAction = SKAction.runBlock() {
                 self.canFire = true;
             };
-            let sequence = SKAction.sequence([waitAction, resetAction]);
+            let soundAction = SKAction.playSoundFileNamed("blaster-fire", waitForCompletion: false);
+            let sequence = SKAction.sequence([soundAction, waitAction, resetAction]);
             runAction(sequence);
            
         }

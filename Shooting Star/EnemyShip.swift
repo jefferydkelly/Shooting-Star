@@ -13,10 +13,13 @@ class EnemyShip: SKSpriteNode {
     var pointValue = 100;
     var dead = false;
     var gameScene: SKScene;
+    let scale:CGFloat = 1.5;
     init(enemyType: String, theScene:SKScene) {
         gameScene = theScene;
         let tex = SKTexture(imageNamed: enemyType);
         super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        yScale = scale;
+        xScale = scale;
         physicsBody = SKPhysicsBody(rectangleOfSize: size);
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         physicsBody?.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Projectile;
@@ -36,7 +39,7 @@ class EnemyShip: SKSpriteNode {
         bullet.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Player;
         bullet.physicsBody?.collisionBitMask = PhysicsCategory.None;
         
-        let moveAction = SKAction.moveToX(-bullet.size.width, duration: 1.5);
+        let moveAction = SKAction.moveByX(-playableRect.width, y: 0, duration: 1.5);
         let removeAction = SKAction.removeFromParent();
         bullet.position = position - CGPointMake((size.width + bullet.size.width) / 2, 0);
         gameScene.addChild(bullet);

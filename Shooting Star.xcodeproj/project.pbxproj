@@ -28,8 +28,10 @@
 		69B88ABD1C761985002B4E29 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88ABC1C761985002B4E29 /* MainMenu.swift */; };
 		69B88ABF1C761DAC002B4E29 /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B88ABE1C761DAC002B4E29 /* Ship.swift */; };
 		69CFDB8E1C764876003D6EF6 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CFDB8D1C764876003D6EF6 /* GameOver.swift */; };
+		69DC78E21C9847F600FD7B13 /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DC78E11C9847F600FD7B13 /* DefaultsManager.swift */; };
 		69E0BFF91C83489A00A83712 /* EnemyWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0BFF81C83489A00A83712 /* EnemyWave.swift */; };
 		69E0BFFB1C8348B200A83712 /* EnemyShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E0BFFA1C8348B200A83712 /* EnemyShip.swift */; };
+		69E45B8B1C95CFD8006058E1 /* blaster-fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 69E45B8A1C95CFD7006058E1 /* blaster-fire.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +79,10 @@
 		69B88ABC1C761985002B4E29 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		69B88ABE1C761DAC002B4E29 /* Ship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
 		69CFDB8D1C764876003D6EF6 /* GameOver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		69DC78E11C9847F600FD7B13 /* DefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		69E0BFF81C83489A00A83712 /* EnemyWave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyWave.swift; sourceTree = "<group>"; };
 		69E0BFFA1C8348B200A83712 /* EnemyShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyShip.swift; sourceTree = "<group>"; };
+		69E45B8A1C95CFD7006058E1 /* blaster-fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "blaster-fire.wav"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 		69B88A861C760D79002B4E29 /* Shooting Star */ = {
 			isa = PBXGroup;
 			children = (
+				69E45B8A1C95CFD7006058E1 /* blaster-fire.wav */,
 				697B12F81C850B2200439B42 /* 8-BIT WONDER.TTF */,
 				69B88A871C760D79002B4E29 /* AppDelegate.swift */,
 				69B88A8D1C760D79002B4E29 /* GameViewController.swift */,
@@ -136,16 +141,12 @@
 				69B88A921C760D79002B4E29 /* Assets.xcassets */,
 				69B88A941C760D79002B4E29 /* LaunchScreen.storyboard */,
 				69B88A971C760D79002B4E29 /* Info.plist */,
-				69E0BFF81C83489A00A83712 /* EnemyWave.swift */,
-				69E0BFFA1C8348B200A83712 /* EnemyShip.swift */,
+				69DC78E41C984C5100FD7B13 /* Ships */,
 				69B88A891C760D79002B4E29 /* GameScene.sks */,
 				69B88ABB1C761947002B4E29 /* Scenes */,
-				69B88ABE1C761DAC002B4E29 /* Ship.swift */,
-				699BC8E71C7F603E0046671E /* Powerup.swift */,
-				699BC8E91C7F60FB0046671E /* SpreaderGun.swift */,
 				698EB9011C762B2600DB512F /* MyUtils.swift */,
-				698EB9031C76343100DB512F /* BasicWeapon.swift */,
-				6908D7EB1C8D3A890072EE78 /* WaveGun.swift */,
+				69DC78E31C984C3C00FD7B13 /* Weapons */,
+				69DC78E11C9847F600FD7B13 /* DefaultsManager.swift */,
 			);
 			path = "Shooting Star";
 			sourceTree = "<group>";
@@ -179,6 +180,27 @@
 				694099E11C889AE30074B5E8 /* CreditsScene.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		69DC78E31C984C3C00FD7B13 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				699BC8E71C7F603E0046671E /* Powerup.swift */,
+				6908D7EB1C8D3A890072EE78 /* WaveGun.swift */,
+				699BC8E91C7F60FB0046671E /* SpreaderGun.swift */,
+				698EB9031C76343100DB512F /* BasicWeapon.swift */,
+			);
+			name = Weapons;
+			sourceTree = "<group>";
+		};
+		69DC78E41C984C5100FD7B13 /* Ships */ = {
+			isa = PBXGroup;
+			children = (
+				69B88ABE1C761DAC002B4E29 /* Ship.swift */,
+				69E0BFF81C83489A00A83712 /* EnemyWave.swift */,
+				69E0BFFA1C8348B200A83712 /* EnemyShip.swift */,
+			);
+			name = Ships;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +307,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69E45B8B1C95CFD8006058E1 /* blaster-fire.wav in Resources */,
 				69B88A8A1C760D79002B4E29 /* GameScene.sks in Resources */,
 				69B88A961C760D79002B4E29 /* LaunchScreen.storyboard in Resources */,
 				69B88A931C760D79002B4E29 /* Assets.xcassets in Resources */,
@@ -317,6 +340,7 @@
 				69B88A8C1C760D79002B4E29 /* GameScene.swift in Sources */,
 				6955D1F91C7BAF0400BC37FB /* Tutorial.swift in Sources */,
 				698EB9021C762B2600DB512F /* MyUtils.swift in Sources */,
+				69DC78E21C9847F600FD7B13 /* DefaultsManager.swift in Sources */,
 				694099E21C889AE30074B5E8 /* CreditsScene.swift in Sources */,
 				69B88A8E1C760D79002B4E29 /* GameViewController.swift in Sources */,
 				698EB9041C76343100DB512F /* BasicWeapon.swift in Sources */,

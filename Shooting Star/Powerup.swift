@@ -10,6 +10,7 @@ import SpriteKit
 
 class Powerup: SKSpriteNode {
     var weapon:BasicWeapon!;
+    let scale:CGFloat = 2;
     init(gun:String) {
         var tex = SKTexture(imageNamed: "spreaderPowerup");
 
@@ -21,12 +22,14 @@ class Powerup: SKSpriteNode {
         }
         
         super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        xScale = scale;
+        yScale = scale;
         physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2);
         physicsBody?.dynamic = true;
         physicsBody?.categoryBitMask = PhysicsCategory.Powerup;
         physicsBody?.contactTestBitMask = PhysicsCategory.Player;
         physicsBody?.collisionBitMask = PhysicsCategory.None;
-        runAction(SKAction.moveToX(-size.width / 2, duration: 4));
+        runAction(SKAction.sequence([SKAction.moveByX(-playableRect.width * 2, y: 0, duration: 6), SKAction.removeFromParent()]));
     }
 
     required init?(coder aDecoder: NSCoder) {

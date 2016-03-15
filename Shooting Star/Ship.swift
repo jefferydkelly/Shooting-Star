@@ -18,12 +18,22 @@ class  Ship: SKSpriteNode {
             theScene.weaponLabel.text = "Weapon: \(weapon.weaponName)";
         }
     };
-    
+    var invincible = false {
+        didSet {
+            if (invincible) {
+                let fadeActions = SKAction.repeatAction(SKAction.sequence([SKAction.fadeAlphaTo(0.25, duration: 0.25), SKAction.fadeAlphaTo(1.0, duration: 0.75)]), count: invincibleTime);
+                runAction(SKAction.sequence([fadeActions, SKAction.runBlock() {
+                    self.invincible = false;
+                    }]));
+            }
+        }
+    }
+    let invincibleTime = 3;
     init() {
         let tex = SKTexture(imageNamed: "Spaceship");
         super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
-        xScale = 1.0 / 3.0;
-        yScale = 1.0 / 3.0;
+        xScale = 1.0 / 2.0;
+        yScale = 1.0 / 2.0;
         physicsBody = SKPhysicsBody(rectangleOfSize: size);
         physicsBody?.dynamic = true;
         physicsBody?.categoryBitMask = PhysicsCategory.Player;
@@ -31,13 +41,14 @@ class  Ship: SKSpriteNode {
         physicsBody?.collisionBitMask = PhysicsCategory.None;
 
         addChild(weapon);
+        invincible = false;
     }
 
     func ChangeWeapon(newWeapon: BasicWeapon) {
         weapon = newWeapon;
         
-    
     }
+    
     func Fire(scene:SKScene) {
         weapon.Fire(scene, ship: self);
     }

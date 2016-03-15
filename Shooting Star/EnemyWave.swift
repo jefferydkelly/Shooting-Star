@@ -20,15 +20,15 @@ class EnemyWave: SKNode {
         
         let baseShip = EnemyShip(enemyType: shipType, theScene: scene);
         let shipWidth = baseShip.size.width;
-        var startX = scene.size.width + shipWidth;
+        var startX = playableRect.maxX + shipWidth;
         if (waveType == WaveTypes.Horizontal) {
-            let startY = CGFloat.random(min: baseShip.size.height * 3 / 2, max: scene.size.height - (baseShip.size.height * 3 / 2));
+            let startY = CGFloat.random(min: playableRect.minY + baseShip.size.height * 3 / 2, max: playableRect.maxY - (baseShip.size.height * 3 / 2));
             for (var i = 0; i < numShips; i+=1) {
                 let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
                 newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , startY);
                 newShip.wave = self;
                 scene.addChild(newShip);
-                let moveX = SKAction.moveToX(-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
+                let moveX = SKAction.moveToX(playableRect.minX-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
                 newShip.runAction(moveX);
                 ships.append(newShip);
             }
@@ -39,14 +39,14 @@ class EnemyWave: SKNode {
             
                 newShip.wave = self;
                 scene.addChild(newShip);
-                let topY = scene.size.height * 3 / 4;
-                let botY = scene.size.height / 4;
-                let moveX = SKAction.moveToX(-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
+                let topY = playableRect.maxY * 3 / 4;
+                let botY = playableRect.minY + playableRect.height / 4;
+                let moveX = SKAction.moveToX(playableRect.minX-newShip.size.width * CGFloat(Double(numShips - i) * 1.5), duration: 5);
                 let moveTime = 0.66;
                 let moveFromMidToTop = SKAction.moveToY(topY, duration: moveTime / 2);
                 let moveFromTopToBot = SKAction.moveToY(botY, duration: moveTime);
                 let moveFromBotToTop = SKAction.moveToY(topY, duration: moveTime);
-                let moveFromBotToMid = SKAction.moveToY(scene.size.height / 2, duration: moveTime);
+                let moveFromBotToMid = SKAction.moveToY(playableRect.midY, duration: moveTime);
                 let repeatY = SKAction.sequence([moveFromMidToTop, moveFromTopToBot, moveFromBotToTop, moveFromTopToBot, moveFromBotToTop, moveFromTopToBot, moveFromBotToTop, moveFromBotToMid]);
                 let sinAction = SKAction.sequence([SKAction.group([moveX, repeatY]), SKAction.removeFromParent()]);
                 newShip.runAction(sinAction);
@@ -55,8 +55,8 @@ class EnemyWave: SKNode {
             }
         } else if (waveType == WaveTypes.Vertical) {
             let startAtBottom = CGFloat.random() < 0.5;
-            startX = scene.size.width - baseShip.size.width;
-            let startY = startAtBottom ? -baseShip.size.height: scene.size.height + baseShip.size.height;
+            startX = playableRect.maxX - baseShip.size.width;
+            let startY = startAtBottom ? playableRect.minY-baseShip.size.height: playableRect.maxY + baseShip.size.height;
             let yDist = startAtBottom ? -baseShip.size.height: baseShip.size.height;
             let moveXTime = 2.0;
             let moveYTime = 2.5;
@@ -65,9 +65,9 @@ class EnemyWave: SKNode {
                 newShip.position = CGPointMake(startX , startY + yDist * CGFloat(i));
                 scene.addChild(newShip);
               
-                let moveUp = SKAction.moveBy(CGVector(dx: 0, dy: scene.size.height * 1.5), duration: moveYTime);
-                let moveDown = moveUp.reversedAction();
-                let moveRight = SKAction.moveByX(-scene.size.width / 4, y: 0, duration: moveXTime);
+                let moveUp = SKAction.moveByX(0, y: playableRect.size.height * CGFloat(1.5), duration: moveYTime);
+                let moveDown = SKAction.moveByX(0, y: -playableRect.size.height * CGFloat(1.5), duration: moveYTime);
+                let moveRight = SKAction.moveByX(-playableRect.width / 4, y: 0, duration: moveXTime);
                 let seq:SKAction!;
                 if (startAtBottom) {
                     seq = SKAction.sequence([moveUp, moveRight, moveDown, moveRight, moveUp, moveRight, moveDown, SKAction.removeFromParent()]);

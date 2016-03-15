@@ -20,10 +20,14 @@ struct PhysicsCategory {
 class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate {
     var spaceship = Ship();
     var shipAlive = false;
+    
     let scoreLabel = SKLabelNode(fontNamed: gameFont);
     var score = 0 {
         didSet{
             scoreLabel.text = "Score: \(score)";
+            if (score > highScore) {
+                highScore = score;
+            }
         }
         
         willSet {
@@ -36,6 +40,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         }
     };
     
+    var highScore = DefaultsManager.sharedDefaultsManager.getHighScore() {
+        didSet {
+            highScoreLabel.text = "High Score: \(highScore)";
+        }
+    }
+    let highScoreLabel = SKLabelNode(fontNamed: gameFont);
+    
     //The amount of time it takes players to respawn after being hit
     let respawnTime = 1.0;
     let livesRemainingLabel = SKLabelNode(fontNamed: gameFont);
@@ -46,31 +57,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     };
     
     var weaponLabel = SKLabelNode(fontNamed: gameFont);
-    
+    let standardFontSize = CGFloat(48);
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor();
         let uiY = size.height - 100;
         scoreLabel.fontColor = SKColor.whiteColor();
-        scoreLabel.fontSize = 36;
-        scoreLabel.position = CGPoint(x: 200, y: uiY);
+        scoreLabel.fontSize = standardFontSize;
+        scoreLabel.position = CGPoint(x: playableRect.minX, y: uiY);
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left;
         scoreLabel.text = "Score: 0";
         addChild(scoreLabel);
         
+        highScoreLabel.fontColor = SKColor.whiteColor();
+        highScoreLabel.fontSize = standardFontSize;
+        highScoreLabel.position = CGPointMake(playableRect.midX, uiY);
+        highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center;
+        highScoreLabel.text = "High Score: \(highScore)";
+        addChild(highScoreLabel);
+        
         livesRemainingLabel.fontColor = SKColor.whiteColor();
-        livesRemainingLabel.fontSize = 36;
-        livesRemainingLabel.position = CGPoint(x: size.width * 3/4 , y: uiY);
+        livesRemainingLabel.fontSize = standardFontSize;
+        livesRemainingLabel.position = CGPoint(x: playableRect.maxX , y: uiY);
+        livesRemainingLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right;
         livesRemainingLabel.text = "Lives: \(livesRemaining)";
         addChild(livesRemainingLabel);
         
         weaponLabel.fontColor = SKColor.whiteColor();
-        weaponLabel.fontSize = 20;
+        weaponLabel.fontSize = standardFontSize;
         weaponLabel.text = "Weapon: Basic";
         weaponLabel.position = CGPointMake(size.width / 4, 50);
         addChild(weaponLabel);
         
         physicsWorld.gravity = CGVectorMake(0, 0);
         physicsWorld.contactDelegate = self;
-        spaceship.position = CGPoint(x: 150, y: size.height / 2);
+        spaceship.position = CGPoint(x: 250, y: size.height / 2);
         spaceship.theScene = self;
         addChild(spaceship);
         shipAlive = true;
@@ -121,7 +141,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
    
     func spawnWave() {
         let r = round(CGFloat.random(min: 0, max: 2));
-        var wt =  WaveTypes.Horizontal;
+        var wt =  WaveTypes.Vertical;
+        
         if (r == 1) {
             wt = WaveTypes.SineWave;
         } else if (r == 2) {
@@ -133,8 +154,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     }
     func spawnAsteroid() {
         let asteroid = SKSpriteNode(imageNamed: "asteroid1");
-        asteroid.position = CGPoint(x:size.width + 16, y: CGFloat.random(min: 0, max: size.height));
-     
+        asteroid.position = CGPoint(x:playableRect.maxX + asteroid.size.width / 2, y: CGFloat.random(min: playableRect.minY, max: playableRect.maxY));
+        asteroid.xScale = 2;
+        asteroid.yScale = 2;
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
         asteroid.physicsBody?.dynamic = true;
         asteroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
@@ -220,7 +242,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     func shipDidCollideWithEnemy(enemy:SKSpriteNode, ship: SKSpriteNode) {
         //enemy.name = "toRemove";
         
-        if (spaceship.weapon.weaponName == "Basic") {
+        if (shipAlive && !spaceship.invincible) {
+         
             //ship.name = "toRemove";
             ship.removeFromParent();
             shipAlive = false;
@@ -230,17 +253,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
                 let respawnAction = SKAction.runBlock() {
                     self.spaceship = Ship();
                     self.spaceship.theScene = self;
-                    self.spaceship.position = CGPoint(x: 150, y: self.size.height / 2);
+                    self.spaceship.position = CGPoint(x: 250, y: self.size.height / 2);
                     self.addChild(self.spaceship);
                     self.shipAlive = true;
+                    self.spaceship.invincible = true;
                 };
                 let respawnWaitAction = SKAction.waitForDuration(respawnTime);
                 runAction(SKAction.sequence([respawnWaitAction, respawnAction]));
             } else {
+                DefaultsManager.sharedDefaultsManager.setHighScore(highScore);
                 view?.presentScene(GameOver(size: size), transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0.5));
             }
-        } else {
-            spaceship.weapon = BasicWeapon();
         }
     }
     

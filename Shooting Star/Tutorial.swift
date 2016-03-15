@@ -39,12 +39,14 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //Creates the info label that will guide the player through the tutorial
         infoLabel.text = "Welcome to Shooting Star.";
         infoLabel.fontColor = SKColor.whiteColor();
-        infoLabel.fontSize = 40;
-        infoLabel.position = CGPointMake(size.width / 2, size.height - 150);
+        infoLabel.fontSize = 48;
+        infoLabel.position = CGPointMake(playableRect.midX, playableRect.maxY - 150);
         addChild(infoLabel);
         
         //Adds the next button to the screen so that players can move through the tutorial
-        nextButton.position = CGPointMake(size.width - 100, size.height / 2);
+        nextButton.position = CGPointMake(playableRect.maxX - 100, playableRect.midY);
+        nextButton.xScale = 2;
+        nextButton.yScale = 2;
         addChild(nextButton);
         asteroidSpawnAction = SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnAsteroid), SKAction.waitForDuration(0.5)]));
     }
@@ -84,7 +86,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         
         let touchLocation = touch.locationInNode(self);
         
-        if (touchLocation.x < 200 && curStep >= 2) {
+        if (touchLocation.x < 300 && curStep >= 2) {
             ship.position.y = touchLocation.y;
         }
     }
@@ -92,7 +94,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     //Displays the information for step one
     func stepOne() {
         infoLabel.text = "This is your ship.";
-        ship.position = CGPointMake(150, size.height / 2);
+        ship.position = CGPointMake(playableRect.minX + 250, playableRect.midY);
         addChild(ship);
         
     }
@@ -101,11 +103,11 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     func stepTwo() {
         
         infoLabel.text = "Slide your finger along the left side";
-        infoLabel.fontSize = 30;
+        infoLabel.fontSize = 48;
         infoLabel2.text = "to move your ship up and down."
         infoLabel2.fontColor = SKColor.whiteColor();
-        infoLabel2.fontSize = 30;
-        infoLabel2.position = CGPointMake(size.width / 2, size.height - 200);
+        infoLabel2.fontSize = 48;
+        infoLabel2.position = CGPointMake(playableRect.midX, infoLabel.position.y - 80);
         addChild(infoLabel2);
 
     }
@@ -114,16 +116,17 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     func stepThree() {
         infoLabel2.removeFromParent();
         infoLabel.text = "Tap anywhere ahead of the ship to fire.";
+        infoLabel.fontSize = 48;
     }
     
     //Displays the information for step one
     func stepFour() {
         infoLabel.text = "Your normal shot only fires straight ahead so";
-        infoLabel.fontSize = 24;
+        infoLabel.fontSize = 40;
         infoLabel2.text = "you'll have to be in front of whatever you fire at"
         infoLabel2.fontColor = SKColor.whiteColor();
-        infoLabel2.fontSize = 22;
-        infoLabel2.position = CGPointMake(size.width / 2, size.height - 200);
+        infoLabel2.fontSize = 40;
+        infoLabel2.position = CGPointMake(size.width / 2, infoLabel.position.y - 80);
         addChild(infoLabel2);
 
     }
@@ -132,9 +135,10 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     func stepFive() {
         infoLabel2.removeFromParent();
         infoLabel.text = "Like this asteroid.";
-        let asteroid = SKSpriteNode(imageNamed: "asteroid");
+        let asteroid = SKSpriteNode(imageNamed: "asteroid1");
         asteroid.position = CGPoint(x:size.width + 16, y: ship.position.y);
-        
+        asteroid.xScale = 2;
+        asteroid.yScale = 2;
         //Sets the asteroids physics info
         //It has a circle with a radius equal to half the width of the asteroid sprite
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
@@ -152,9 +156,11 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //When one has been hit, asteroids will start spawning at random y's.
         let tauntAction = SKAction.runBlock() {
             self.infoLabel.text = "You let it get past you!  Try again with another.";
-            let astoroid = SKSpriteNode(imageNamed: "asteroid");
+            let astoroid = SKSpriteNode(imageNamed: "asteroid1");
             astoroid.position = CGPoint(x:self.size.width + 16, y: self.ship.position.y);
-            
+            asteroid.xScale = 2;
+            asteroid.yScale = 2;
+
             //Sets the asteroids physics info
             //It has a circle with a radius equal to half the width of the asteroid sprite
             astoroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
@@ -185,9 +191,11 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     //Spawns an asteroid at a random y-location and sends it flying towards the other side
     func spawnAsteroid() {
         
-        let asteroid = SKSpriteNode(imageNamed: "asteroid");
+        let asteroid = SKSpriteNode(imageNamed: "asteroid1");
         asteroid.position = CGPoint(x:size.width + 16, y: CGFloat.random(min: 0, max: size.height));
-        
+        asteroid.xScale = 2;
+        asteroid.yScale = 2;
+
         //Sets the asteroids physics info
         //It has a circle with a radius equal to half the width of the asteroid sprite
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
@@ -262,7 +270,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //Respawn the ship
         let respawnAction = SKAction.runBlock() {
             self.ship = Ship();
-            self.ship.position = CGPoint(x: 150, y: self.size.height / 2);
+            self.ship.position = CGPoint(x: playableRect.minX + 250, y: playableRect.midY);
             self.addChild(self.ship);
             if (self.asteroidsDestroyed == 0) {
                 let asteroid = SKSpriteNode(imageNamed: "asteroid");

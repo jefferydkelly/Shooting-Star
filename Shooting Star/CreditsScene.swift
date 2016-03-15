@@ -13,38 +13,50 @@ class CreditsScene: SKScene, UIGestureRecognizerDelegate {
     let jdLabel = SKLabelNode(fontNamed: gameFont);
     let nashLabel = SKLabelNode(fontNamed: gameFont);
     let fontCredit = SKLabelNode(fontNamed: gameFont);
+    let soundCredit = SKLabelNode(fontNamed: gameFont);
     let menuButton = SKLabelNode(fontNamed: gameFont);
     
+    let creditSize = CGFloat(40);
+    let buttonSize = CGFloat(60);
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.blackColor();
         creditsLabel.text = "Credits";
         creditsLabel.fontColor = SKColor.whiteColor();
-        creditsLabel.fontSize = 24;
-        creditsLabel.position = CGPointMake(size.width / 2, size.height - 50);
+        creditsLabel.fontSize = creditSize;
+        creditsLabel.position = CGPointMake(playableRect.midX, playableRect.maxY - 50);
         addChild(creditsLabel);
         
         jdLabel.text = "Jeffery 'J.D.' Kelly - Programming, Design";
         jdLabel.fontColor = SKColor.whiteColor();
-        jdLabel.fontSize = 24;
-        jdLabel.position = CGPointMake(size.width / 2, size.height * 3 / 4);
+        jdLabel.fontSize = creditSize;
+        jdLabel.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 3 / 4);
         addChild(jdLabel);
         
         nashLabel.text = "Nishit Savla - Art";
         nashLabel.fontColor = SKColor.whiteColor();
-        nashLabel.fontSize = 24;
-        nashLabel.position = CGPointMake(size.width / 2, size.height * 5 / 8 );
+        nashLabel.fontSize = creditSize;
+        nashLabel.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 5 / 8);
+
         addChild(nashLabel);
         
         fontCredit.text = "8Bit-Wonder Font by Joiyo Hatgaya";
         fontCredit.fontColor = SKColor.whiteColor();
-        fontCredit.fontSize = 24;
-        fontCredit.position = CGPointMake(size.width / 2, size.height / 2);
+        fontCredit.fontSize = creditSize;
+        fontCredit.position = CGPointMake(playableRect.midX, playableRect.midY);
         addChild(fontCredit);
+        
+        soundCredit.text = "Blaster Sound Effect by Freesound User astrand";
+        soundCredit.fontColor = SKColor.whiteColor();
+        soundCredit.fontSize = creditSize;
+        soundCredit.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 3/8);
+
+        addChild(soundCredit);
         
         menuButton.text = "Return to Main Menu";
         menuButton.fontColor = SKColor.whiteColor();
-        menuButton.fontSize = 40;
-        menuButton.position = CGPointMake(size.width / 2, size.height / 8);
+        menuButton.fontSize = buttonSize;
+        menuButton.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height/8);
+
         addChild(menuButton);
         
         let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
