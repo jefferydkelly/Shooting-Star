@@ -21,10 +21,15 @@ class EnemyWave: SKNode {
         let baseShip = EnemyShip(enemyType: shipType, theScene: scene);
         let shipWidth = baseShip.size.width;
         var startX = playableRect.maxX + shipWidth;
+        
+        let monNum = Int(round(CGFloat.random(min: 1, max: 8)));
+        print(monNum);
+        let monster = "Monster \(monNum)";
+        print(monster);
         if (waveType == WaveTypes.Horizontal) {
             let startY = CGFloat.random(min: playableRect.minY + baseShip.size.height * 3 / 2, max: playableRect.maxY - (baseShip.size.height * 3 / 2));
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
+                let newShip = EnemyShip(enemyType: monster, theScene: scene);
                 newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , startY);
                 newShip.wave = self;
                 scene.addChild(newShip);
@@ -34,7 +39,7 @@ class EnemyWave: SKNode {
             }
         } else if (waveType == WaveTypes.SineWave) {
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
+                let newShip = EnemyShip(enemyType: monster, theScene: scene);
                 newShip.position = CGPointMake(startX + (shipWidth * CGFloat(i) * 1.5) , baseShip.size.height);
             
                 newShip.wave = self;
@@ -61,7 +66,7 @@ class EnemyWave: SKNode {
             let moveXTime = 2.0;
             let moveYTime = 2.5;
             for (var i = 0; i < numShips; i+=1) {
-                let newShip = EnemyShip(enemyType: "Monster 7", theScene: scene);
+                let newShip = EnemyShip(enemyType: monster, theScene: scene);
                 newShip.position = CGPointMake(startX , startY + yDist * CGFloat(i));
                 scene.addChild(newShip);
               

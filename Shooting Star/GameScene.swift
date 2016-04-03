@@ -142,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
    
     func spawnWave() {
         let r = round(CGFloat.random(min: 0, max: 2));
-        var wt =  WaveTypes.Vertical;
+        var wt =  WaveTypes.Horizontal;
         
         if (r == 1) {
             wt = WaveTypes.SineWave;
@@ -215,7 +215,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             let eship = (enemy as! EnemyShip);
             eship.dead = true;
             if let emitter = SKEmitterNode(fileNamed: "SparkParticles") {
-                print("Sparking");
                 emitter.position = eship.position;
                 addChild(emitter);
                 emitter.runAction(emitterActions);
