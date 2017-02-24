@@ -25,42 +25,42 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     var asteroidsDestroyed = 0;
     //The action of spawning asteroids.  
     //Pay no attention to what it says here.  This is just so the compiler doesn't yell at me and force me to make it an optional.
-    var asteroidSpawnAction:SKAction = SKAction.scaleBy(1, duration: 1);
+    var asteroidSpawnAction:SKAction = SKAction.scale(by: 1, duration: 1);
     
     var ship = Ship();
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         //Sets the background color to black
-        backgroundColor = SKColor.blackColor();
+        backgroundColor = SKColor.black;
         
         //Sets up the physics of the world
-        physicsWorld.gravity = CGVectorMake(0, 0);
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0);
         physicsWorld.contactDelegate = self;
         
         //Creates the info label that will guide the player through the tutorial
         infoLabel.text = "Welcome to Shooting Star.";
-        infoLabel.fontColor = SKColor.whiteColor();
+        infoLabel.fontColor = SKColor.white;
         infoLabel.fontSize = 48;
-        infoLabel.position = CGPointMake(playableRect.midX, playableRect.maxY - 150);
+        infoLabel.position = CGPoint(x: playableRect.midX, y: playableRect.maxY - 150);
         addChild(infoLabel);
         
         //Adds the next button to the screen so that players can move through the tutorial
-        nextButton.position = CGPointMake(playableRect.maxX - 100, playableRect.midY);
+        nextButton.position = CGPoint(x: playableRect.maxX - 100, y: playableRect.midY);
         nextButton.xScale = 2;
         nextButton.yScale = 2;
         addChild(nextButton);
-        asteroidSpawnAction = SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnAsteroid), SKAction.waitForDuration(0.5)]));
+        asteroidSpawnAction = SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnAsteroid), SKAction.wait(forDuration: 0.5)]));
     }
     
     //Checks the first touch and determines if it is for movement, firing or changing screens
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
+        let touchLocation = touch.location(in: self);
         //If you hit the next button, change the screen
-        if (nodeAtPoint(touchLocation) == nextButton) {
-            curStep++;
+        if (atPoint(touchLocation) == nextButton) {
+            curStep += 1;
             switch curStep {
             case 1: stepOne();
             case 2: stepTwo();
@@ -79,12 +79,12 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     }
     
     //When the touch is moved after step 2 and if it's on the left side, move the ship to the touch location
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
+        let touchLocation = touch.location(in: self);
         
         if (touchLocation.x < 300 && curStep >= 2) {
             ship.position.y = touchLocation.y;
@@ -94,7 +94,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     //Displays the information for step one
     func stepOne() {
         infoLabel.text = "This is your ship.";
-        ship.position = CGPointMake(playableRect.minX + 250, playableRect.midY);
+        ship.position = CGPoint(x: playableRect.minX + 250, y: playableRect.midY);
         addChild(ship);
         
     }
@@ -105,9 +105,9 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         infoLabel.text = "Slide your finger along the left side";
         infoLabel.fontSize = 48;
         infoLabel2.text = "to move your ship up and down."
-        infoLabel2.fontColor = SKColor.whiteColor();
+        infoLabel2.fontColor = SKColor.white;
         infoLabel2.fontSize = 48;
-        infoLabel2.position = CGPointMake(playableRect.midX, infoLabel.position.y - 80);
+        infoLabel2.position = CGPoint(x: playableRect.midX, y: infoLabel.position.y - 80);
         addChild(infoLabel2);
 
     }
@@ -124,9 +124,9 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         infoLabel.text = "Your normal shot only fires straight ahead so";
         infoLabel.fontSize = 40;
         infoLabel2.text = "you'll have to be in front of whatever you fire at"
-        infoLabel2.fontColor = SKColor.whiteColor();
+        infoLabel2.fontColor = SKColor.white;
         infoLabel2.fontSize = 40;
-        infoLabel2.position = CGPointMake(size.width / 2, infoLabel.position.y - 80);
+        infoLabel2.position = CGPoint(x: size.width / 2, y: infoLabel.position.y - 80);
         addChild(infoLabel2);
 
     }
@@ -142,7 +142,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //Sets the asteroids physics info
         //It has a circle with a radius equal to half the width of the asteroid sprite
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
-        asteroid.physicsBody?.dynamic = true;
+        asteroid.physicsBody?.isDynamic = true;
         //It's part of the enemy category
         asteroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         //Check for collision against both Projectiles and Players
@@ -151,10 +151,10 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         
         addChild(asteroid);
         
-        let moveAction = SKAction.moveToX(-16, duration: 4.0);
+        let moveAction = SKAction.moveTo(x: -16, duration: 4.0);
         //If the first asteroid manages to make it past the player, taunt them a bit and spawn another.
         //When one has been hit, asteroids will start spawning at random y's.
-        let tauntAction = SKAction.runBlock() {
+        let tauntAction = SKAction.run() {
             self.infoLabel.text = "You let it get past you!  Try again with another.";
             let astoroid = SKSpriteNode(imageNamed: "asteroid1");
             astoroid.position = CGPoint(x:self.size.width + 16, y: self.ship.position.y);
@@ -164,7 +164,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
             //Sets the asteroids physics info
             //It has a circle with a radius equal to half the width of the asteroid sprite
             astoroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
-            astoroid.physicsBody?.dynamic = true;
+            astoroid.physicsBody?.isDynamic = true;
             //It's part of the enemy category
             astoroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
             //Check for collision against both Projectiles and Players
@@ -174,17 +174,17 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
             
             self.addChild(astoroid);
             
-            let moveAction = SKAction.moveToX(-16, duration: 4.0);
-            let tauntAction = SKAction.runBlock() {
+            let moveAction = SKAction.moveTo(x: -16, duration: 4.0);
+            let tauntAction = SKAction.run() {
                 self.infoLabel.text = "You let another get past you!  Try again with another.";
                 self.spawnAsteroid();
             };
             let removeAction = SKAction.removeFromParent();
-            astoroid.runAction(SKAction.sequence([moveAction, tauntAction, removeAction]));
+            astoroid.run(SKAction.sequence([moveAction, tauntAction, removeAction]));
 
         };
         let removeAction = SKAction.removeFromParent();
-        asteroid.runAction(SKAction.sequence([moveAction, tauntAction, removeAction]));
+        asteroid.run(SKAction.sequence([moveAction, tauntAction, removeAction]));
 
     }
     
@@ -199,7 +199,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //Sets the asteroids physics info
         //It has a circle with a radius equal to half the width of the asteroid sprite
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
-        asteroid.physicsBody?.dynamic = true;
+        asteroid.physicsBody?.isDynamic = true;
         //It's part of the enemy category
         asteroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         //Check for collision against both Projectiles and Players
@@ -209,14 +209,14 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         
         addChild(asteroid);
         
-        let moveAction = SKAction.moveToX(-16, duration: 4.0);
+        let moveAction = SKAction.moveTo(x: -16, duration: 4.0);
         let removeAction = SKAction.removeFromParent();
-        asteroid.runAction(SKAction.sequence([moveAction, removeAction]));
+        asteroid.run(SKAction.sequence([moveAction, removeAction]));
         
     }
     
     //Handles collision
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody;
         var secondBody: SKPhysicsBody;
         
@@ -240,7 +240,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
     }
     
     //Handles the collision between projectiles and asteroids, destorying both
-    func projectileDidCollideWithEnemy(enemy:SKSpriteNode, projectile:SKSpriteNode) {
+    func projectileDidCollideWithEnemy(_ enemy:SKSpriteNode, projectile:SKSpriteNode) {
         enemy.removeFromParent();
         projectile.removeFromParent();
         asteroidsDestroyed += 1;
@@ -248,7 +248,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
         //If this is the player's first asteroid, congratulate them.
         if (asteroidsDestroyed == 1) {
             infoLabel.text = "Good!  You destroyed one.  Now, try to get five."
-            runAction(asteroidSpawnAction);
+            run(asteroidSpawnAction);
         } else if (asteroidsDestroyed < 5) {
             //If they've destoryed more, let them know how much more they have to go.
             infoLabel.text = "\(5 - asteroidsDestroyed) to go";
@@ -256,19 +256,19 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
             //When they've destroyed all of them, let them know it's time to move on.
             infoLabel.text = "All right.  You're clear to ride on Shooting Star."; //Pillows / FLCL Reference
             removeAllActions();
-            let changeAction = SKAction.runBlock() {self.view?.presentScene(GameScene(size: self.size), transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0.5));}
-            runAction(SKAction.sequence([SKAction.waitForDuration(2.0), changeAction]));
+            let changeAction = SKAction.run() {self.view?.presentScene(GameScene(size: self.size), transition: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5));}
+            run(SKAction.sequence([SKAction.wait(forDuration: 2.0), changeAction]));
         }
     }
     
     //Handles the collision between the ship and an asteroid
-    func shipDidCollideWithEnemy(enemy:SKSpriteNode, ship: SKSpriteNode) {
+    func shipDidCollideWithEnemy(_ enemy:SKSpriteNode, ship: SKSpriteNode) {
         //Remove both
         enemy.removeFromParent();
         ship.removeFromParent();
       
         //Respawn the ship
-        let respawnAction = SKAction.runBlock() {
+        let respawnAction = SKAction.run() {
             self.ship = Ship();
             self.ship.position = CGPoint(x: playableRect.minX + 250, y: playableRect.midY);
             self.addChild(self.ship);
@@ -279,7 +279,7 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
                 //Sets the asteroids physics info
                 //It has a circle with a radius equal to half the width of the asteroid sprite
                 asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
-                asteroid.physicsBody?.dynamic = true;
+                asteroid.physicsBody?.isDynamic = true;
                 //It's part of the enemy category
                 asteroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
                 //Check for collision against both Projectiles and Players
@@ -289,20 +289,20 @@ class Tutorial:SKScene, SKPhysicsContactDelegate {
             
                 self.addChild(asteroid);
             
-                let moveAction = SKAction.moveToX(-16, duration: 4.0);
+                let moveAction = SKAction.moveTo(x: -16, duration: 4.0);
                 let removeAction = SKAction.removeFromParent();
-                asteroid.runAction(SKAction.sequence([moveAction, removeAction]));
+                asteroid.run(SKAction.sequence([moveAction, removeAction]));
             }
         };
         
-        let respawnWaitAction = SKAction.waitForDuration(1);
+        let respawnWaitAction = SKAction.wait(forDuration: 1);
         
         //If the player hasn't destoryed any asteroids yet, give them some encouragement.
         if (asteroidsDestroyed == 0) {
             infoLabel.text = "You got hit.  It happens to everyone.  Try again.";
         }
         
-        runAction(SKAction.sequence([respawnWaitAction, respawnAction]));
+        run(SKAction.sequence([respawnWaitAction, respawnAction]));
         
     }
 

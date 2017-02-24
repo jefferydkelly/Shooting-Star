@@ -20,29 +20,29 @@ class BasicWeapon: SKNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func Fire(scene:SKScene, ship:Ship) {
+    func Fire(_ scene:SKScene, ship:Ship) {
         if (canFire) {
             let bullet = SKSpriteNode(imageNamed: "bullet");
-            bullet.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
-            bullet.physicsBody?.dynamic = true;
+            bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size);
+            bullet.physicsBody?.isDynamic = true;
             bullet.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
             bullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bullet.physicsBody?.collisionBitMask = PhysicsCategory.None;
         
-            let moveAction = SKAction.moveToX(scene.size.width + bullet.size.width, duration: 1.5);
+            let moveAction = SKAction.moveTo(x: scene.size.width + bullet.size.width, duration: 1.5);
             let removeAction = SKAction.removeFromParent();
-            bullet.position = ship.position + CGPointMake((ship.size.width + bullet.size.width) / 2, 0);
+            bullet.position = ship.position + CGPoint(x: (ship.size.width + bullet.size.width) / 2, y: 0);
             scene.addChild(bullet);
-            bullet.runAction(SKAction.sequence([moveAction, removeAction]));
+            bullet.run(SKAction.sequence([moveAction, removeAction]));
             canFire = false;
         
-            let waitAction = SKAction.waitForDuration(coolDown);
-            let resetAction = SKAction.runBlock() {
+            let waitAction = SKAction.wait(forDuration: coolDown);
+            let resetAction = SKAction.run() {
                 self.canFire = true;
             };
             let soundAction = SKAction.playSoundFileNamed("blaster-fire", waitForCompletion: false);
             let sequence = SKAction.sequence([soundAction, waitAction, resetAction]);
-            runAction(sequence);
+            run(sequence);
            
         }
     }

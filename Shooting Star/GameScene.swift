@@ -58,65 +58,65 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     
     var weaponLabel = SKLabelNode(fontNamed: gameFont);
     let standardFontSize = CGFloat(48);
-    let emitterActions = SKAction.sequence([SKAction.waitForDuration(0.25), SKAction.removeFromParent()]);
-    override func didMoveToView(view: SKView) {
-        backgroundColor = SKColor.blackColor();
+    let emitterActions = SKAction.sequence([SKAction.wait(forDuration: 0.25), SKAction.removeFromParent()]);
+    override func didMove(to view: SKView) {
+        backgroundColor = SKColor.black;
         let uiY = size.height - 100;
-        scoreLabel.fontColor = SKColor.whiteColor();
+        scoreLabel.fontColor = SKColor.white;
         scoreLabel.fontSize = standardFontSize;
         scoreLabel.position = CGPoint(x: playableRect.minX, y: uiY);
-        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left;
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left;
         scoreLabel.text = "Score: 0";
         addChild(scoreLabel);
         
-        highScoreLabel.fontColor = SKColor.whiteColor();
+        highScoreLabel.fontColor = SKColor.white;
         highScoreLabel.fontSize = standardFontSize;
-        highScoreLabel.position = CGPointMake(playableRect.midX, uiY);
-        highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center;
+        highScoreLabel.position = CGPoint(x: playableRect.midX, y: uiY);
+        highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center;
         highScoreLabel.text = "High Score: \(highScore)";
         addChild(highScoreLabel);
         
-        livesRemainingLabel.fontColor = SKColor.whiteColor();
+        livesRemainingLabel.fontColor = SKColor.white;
         livesRemainingLabel.fontSize = standardFontSize;
         livesRemainingLabel.position = CGPoint(x: playableRect.maxX , y: uiY);
-        livesRemainingLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right;
+        livesRemainingLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right;
         livesRemainingLabel.text = "Lives: \(livesRemaining)";
         addChild(livesRemainingLabel);
         
-        weaponLabel.fontColor = SKColor.whiteColor();
+        weaponLabel.fontColor = SKColor.white;
         weaponLabel.fontSize = standardFontSize;
         weaponLabel.text = "Weapon: Basic";
-        weaponLabel.position = CGPointMake(size.width / 4, 50);
+        weaponLabel.position = CGPoint(x: size.width / 4, y: 50);
         addChild(weaponLabel);
         
-        physicsWorld.gravity = CGVectorMake(0, 0);
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0);
         physicsWorld.contactDelegate = self;
         spaceship.position = CGPoint(x: 250, y: size.height / 2);
         spaceship.theScene = self;
         addChild(spaceship);
         shipAlive = true;
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.runBlock(spawnWave), SKAction.waitForDuration(3.0), SKAction.runBlock(spawnAsteroids), SKAction.waitForDuration(5.0)])));
-        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run(spawnWave), SKAction.wait(forDuration: 3.0), SKAction.run(spawnAsteroids), SKAction.wait(forDuration: 5.0)])));
+        let tap = UITapGestureRecognizer(target: self, action: #selector(GameScene.tapDetected(_:)));
         tap.delegate = self;
         view.addGestureRecognizer(tap);
         
     }
     // MARK: Gesture Handling
-    func tapDetected(sender:UITapGestureRecognizer) {
+    func tapDetected(_ sender:UITapGestureRecognizer) {
         spaceship.Fire(self);
     }
     
     func gestureRecognizer(_: UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
+        shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
             return true
     }
 
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         var alreadyMoved = false;
         
         for touch in touches {
-            let touchLocation = touch.locationInNode(self);
+            let touchLocation = touch.location(in: self);
             
             if (touchLocation.x < playableRect.size.width / 2 && !alreadyMoved) {
                 if (touchLocation.y >= playableRect.minY + spaceship.size.height / 2 && touchLocation.y <= playableRect.maxY - spaceship.size.height) {
@@ -128,11 +128,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
     
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         var alreadyMoved = false;
         
         for touch in touches {
-            let touchLocation = touch.locationInNode(self);
+            let touchLocation = touch.location(in: self);
             if (touchLocation.x < size.width / 2 && !alreadyMoved) {
                 spaceship.position = CGPoint(x:spaceship.position.x, y:touchLocation.y);
                 alreadyMoved = true;
@@ -142,12 +142,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
    
     func spawnWave() {
         let r = round(CGFloat.random(min: 0, max: 2));
-        var wt =  WaveTypes.Horizontal;
+        var wt =  WaveTypes.horizontal;
         
         if (r == 1) {
-            wt = WaveTypes.SineWave;
+            wt = WaveTypes.sineWave;
         } else if (r == 2) {
-            wt = WaveTypes.Vertical;
+            wt = WaveTypes.vertical;
         }
     
         let wave = EnemyWave(scene: self, shipType: "Monster 1", numShips: 5, waveType: wt);
@@ -159,28 +159,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         asteroid.xScale = 2;
         asteroid.yScale = 2;
         asteroid.physicsBody = SKPhysicsBody(circleOfRadius: asteroid.size.width / 2);
-        asteroid.physicsBody?.dynamic = true;
+        asteroid.physicsBody?.isDynamic = true;
         asteroid.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         asteroid.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile;
         asteroid.physicsBody?.collisionBitMask = PhysicsCategory.None;
         
         addChild(asteroid);
         
-        let moveAction = SKAction.moveToX(-16, duration: 2.0);
+        let moveAction = SKAction.moveTo(x: -16, duration: 2.0);
         let removeAction = SKAction.removeFromParent();
-        asteroid.runAction(SKAction.sequence([moveAction, removeAction]));
+        asteroid.run(SKAction.sequence([moveAction, removeAction]));
        
     }
     
     func spawnAsteroids() {
-        for (var i = 0; i < 5; i+=1) {
+        for i in 0 ..< 5 {
             spawnAsteroid();
         }
         
     }
 
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         var firstBody: SKPhysicsBody;
         var secondBody: SKPhysicsBody;
         
@@ -206,7 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             }
         }
     }
-    func projectileDidCollideWithEnemy(enemy:SKSpriteNode, projectile:SKSpriteNode) {
+    func projectileDidCollideWithEnemy(_ enemy:SKSpriteNode, projectile:SKSpriteNode) {
         
         //enemy.name = "toRemove";
         //projectile.name = "toRemove";
@@ -217,7 +217,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             if let emitter = SKEmitterNode(fileNamed: "SparkParticles") {
                 emitter.position = eship.position;
                 addChild(emitter);
-                emitter.runAction(emitterActions);
+                emitter.run(emitterActions);
             }
             if let wave = eship.wave {
                 
@@ -245,7 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
         
     }
     
-    func shipDidCollideWithEnemy(enemy:SKSpriteNode, ship: SKSpriteNode) {
+    func shipDidCollideWithEnemy(_ enemy:SKSpriteNode, ship: SKSpriteNode) {
         //enemy.name = "toRemove";
         
         if (shipAlive && !spaceship.invincible) {
@@ -256,7 +256,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
             livesRemaining -= 1;
           
             if (livesRemaining > 0) {
-                let respawnAction = SKAction.runBlock() {
+                let respawnAction = SKAction.run() {
                     self.spaceship = Ship();
                     self.spaceship.theScene = self;
                     self.spaceship.position = CGPoint(x: 250, y: self.size.height / 2);
@@ -264,24 +264,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, UIGestureRecognizerDelegate 
                     self.shipAlive = true;
                     self.spaceship.invincible = true;
                 };
-                let respawnWaitAction = SKAction.waitForDuration(respawnTime);
-                runAction(SKAction.sequence([respawnWaitAction, respawnAction]));
+                let respawnWaitAction = SKAction.wait(forDuration: respawnTime);
+                run(SKAction.sequence([respawnWaitAction, respawnAction]));
             } else {
                 DefaultsManager.sharedDefaultsManager.setHighScore(highScore);
-                view?.presentScene(GameOver(size: size), transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0.5));
+                view?.presentScene(GameOver(size: size), transition: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5));
             }
         }
     }
     
-    func shipDidCollideWithPowerup(powerup: Powerup) {
+    func shipDidCollideWithPowerup(_ powerup: Powerup) {
         spaceship.ChangeWeapon(powerup.weapon);
         //powerup.name = "toRemove";
         powerup.removeFromParent();
         
     }
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         
-        enumerateChildNodesWithName("toRemove") {
+        enumerateChildNodes(withName: "toRemove") {
            node, stop in
             node.removeFromParent();
         };

@@ -22,11 +22,11 @@ class SpreaderGun: BasicWeapon {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func Fire(scene:SKScene, ship:Ship) {
+    override func Fire(_ scene:SKScene, ship:Ship) {
         if (canFire) {
             let bullet = SKSpriteNode(imageNamed: "bullet");
-            bullet.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
-            bullet.physicsBody?.dynamic = true;
+            bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size);
+            bullet.physicsBody?.isDynamic = true;
             bullet.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
             bullet.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bullet.physicsBody?.collisionBitMask = PhysicsCategory.None;
@@ -35,12 +35,12 @@ class SpreaderGun: BasicWeapon {
             bullet.position = bulletPosition;
             scene.addChild(bullet);
             
-            let moveAction = SKAction.moveToX(scene.size.width + 10, duration: 1.0);
-            bullet.runAction(SKAction.sequence([moveAction, removeAction]));
+            let moveAction = SKAction.moveTo(x: scene.size.width + 10, duration: 1.0);
+            bullet.run(SKAction.sequence([moveAction, removeAction]));
             
             let bulletTwo = SKSpriteNode(imageNamed: "bullet");
-            bulletTwo.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
-            bulletTwo.physicsBody?.dynamic = true;
+            bulletTwo.physicsBody = SKPhysicsBody(rectangleOf: bullet.size);
+            bulletTwo.physicsBody?.isDynamic = true;
             bulletTwo.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
             bulletTwo.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bulletTwo.physicsBody?.collisionBitMask = PhysicsCategory.None;
@@ -48,32 +48,32 @@ class SpreaderGun: BasicWeapon {
             bulletTwo.zRotation = pi / 4;
             scene.addChild(bulletTwo);
             let moveX = CGFloat(3000);
-            let moveActionTwo = SKAction.moveBy(CGVector(dx: moveX, dy: scene.size.height), duration: 4);
-            bulletTwo.runAction(SKAction.sequence([moveActionTwo, removeAction]));
+            let moveActionTwo = SKAction.move(by: CGVector(dx: moveX, dy: scene.size.height), duration: 4);
+            bulletTwo.run(SKAction.sequence([moveActionTwo, removeAction]));
             
             let bulletThree = SKSpriteNode(imageNamed: "bullet");
-            bulletThree.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
-            bulletThree.physicsBody?.dynamic = true;
+            bulletThree.physicsBody = SKPhysicsBody(rectangleOf: bullet.size);
+            bulletThree.physicsBody?.isDynamic = true;
             bulletThree.physicsBody?.categoryBitMask = PhysicsCategory.Projectile;
             bulletThree.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy;
             bulletThree.physicsBody?.collisionBitMask = PhysicsCategory.None;
             bulletThree.position = bulletPosition;
             bulletThree.zRotation = -pi / 4;
             scene.addChild(bulletThree);
-            let moveActionThree = SKAction.moveBy(CGVector(dx: moveX, dy: -scene.size.height), duration: 4);
-            bulletThree.runAction(SKAction.sequence([moveActionThree, removeAction]));
+            let moveActionThree = SKAction.move(by: CGVector(dx: moveX, dy: -scene.size.height), duration: 4);
+            bulletThree.run(SKAction.sequence([moveActionThree, removeAction]));
             
             
             
             
             canFire = false;
             
-            let waitAction = SKAction.waitForDuration(coolDown);
-            let resetAction = SKAction.runBlock() {
+            let waitAction = SKAction.wait(forDuration: coolDown);
+            let resetAction = SKAction.run() {
                 self.canFire = true;
             };
             let sequence = SKAction.sequence([waitAction, resetAction]);
-            runAction(sequence);
+            run(sequence);
             
         }
     }

@@ -18,100 +18,100 @@ class CreditsScene: SKScene, UIGestureRecognizerDelegate {
     
     let creditSize = CGFloat(40);
     let buttonSize = CGFloat(60);
-    override func didMoveToView(view: SKView) {
-        backgroundColor = SKColor.blackColor();
+    override func didMove(to view: SKView) {
+        backgroundColor = SKColor.black;
         creditsLabel.text = "Credits";
-        creditsLabel.fontColor = SKColor.whiteColor();
+        creditsLabel.fontColor = SKColor.white;
         creditsLabel.fontSize = creditSize;
-        creditsLabel.position = CGPointMake(playableRect.midX, playableRect.maxY - 50);
+        creditsLabel.position = CGPoint(x: playableRect.midX, y: playableRect.maxY - 50);
         addChild(creditsLabel);
         
         jdLabel.text = "Jeffery 'J.D.' Kelly - Programming, Design";
-        jdLabel.fontColor = SKColor.whiteColor();
+        jdLabel.fontColor = SKColor.white;
         jdLabel.fontSize = creditSize;
-        jdLabel.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 3 / 4);
+        jdLabel.position = CGPoint(x: playableRect.midX, y: playableRect.minY + playableRect.height * 3 / 4);
         addChild(jdLabel);
         
         nashLabel.text = "Nishit Savla - Art";
-        nashLabel.fontColor = SKColor.whiteColor();
+        nashLabel.fontColor = SKColor.white;
         nashLabel.fontSize = creditSize;
-        nashLabel.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 5 / 8);
+        nashLabel.position = CGPoint(x: playableRect.midX, y: playableRect.minY + playableRect.height * 5 / 8);
 
         addChild(nashLabel);
         
         fontCredit.text = "8Bit-Wonder Font by Joiyo Hatgaya";
-        fontCredit.fontColor = SKColor.whiteColor();
+        fontCredit.fontColor = SKColor.white;
         fontCredit.fontSize = creditSize;
-        fontCredit.position = CGPointMake(playableRect.midX, playableRect.midY);
+        fontCredit.position = CGPoint(x: playableRect.midX, y: playableRect.midY);
         addChild(fontCredit);
         
         soundCredit.text = "Blaster Sound Effect by Freesound User astrand";
-        soundCredit.fontColor = SKColor.whiteColor();
+        soundCredit.fontColor = SKColor.white;
         soundCredit.fontSize = creditSize;
-        soundCredit.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height * 3/8);
+        soundCredit.position = CGPoint(x: playableRect.midX, y: playableRect.minY + playableRect.height * 3/8);
 
         addChild(soundCredit);
         
         menuButton.text = "Return to Main Menu";
-        menuButton.fontColor = SKColor.whiteColor();
+        menuButton.fontColor = SKColor.white;
         menuButton.fontSize = buttonSize;
-        menuButton.position = CGPointMake(playableRect.midX, playableRect.minY + playableRect.height/8);
+        menuButton.position = CGPoint(x: playableRect.midX, y: playableRect.minY + playableRect.height/8);
 
         addChild(menuButton);
         
-        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CreditsScene.tapDetected(_:)));
         tap.delegate = self;
         view.addGestureRecognizer(tap);
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        let touchLocation = touch.location(in: self);
+        let touchedNode = self.atPoint(touchLocation);
         
         if (touchedNode == menuButton) {
-            menuButton.fontColor = SKColor.redColor();
+            menuButton.fontColor = SKColor.red;
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        let touchLocation = touch.location(in: self);
+        let touchedNode = self.atPoint(touchLocation);
         
         if (touchedNode == menuButton) {
-            menuButton.fontColor = SKColor.redColor();
+            menuButton.fontColor = SKColor.red;
         } else {
-            menuButton.fontColor = SKColor.whiteColor();
+            menuButton.fontColor = SKColor.white;
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        let touchLocation = touch.location(in: self);
+        let touchedNode = self.atPoint(touchLocation);
         
         if (touchedNode == menuButton) {
             let gameScene = MainMenu(size: size);
-            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
+            view?.presentScene(gameScene, transition: SKTransition.push(with: SKTransitionDirection.right, duration: 1.0));
         }
     }
     
     // MARK: Gesture Handling
-    func tapDetected(sender:UITapGestureRecognizer) {
-        let tappedNode = self.nodeAtPoint(self.convertPointFromView(sender.locationOfTouch(0, inView: view!)));
+    func tapDetected(_ sender:UITapGestureRecognizer) {
+        let tappedNode = self.atPoint(self.convertPoint(fromView: sender.location(ofTouch: 0, in: view!)));
         if (tappedNode == menuButton) {
             let gameScene = MainMenu(size: size);
-            view?.presentScene(gameScene, transition: SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0));
+            view?.presentScene(gameScene, transition: SKTransition.push(with: SKTransitionDirection.right, duration: 1.0));
         }
     }
     

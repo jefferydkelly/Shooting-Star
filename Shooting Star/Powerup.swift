@@ -21,15 +21,15 @@ class Powerup: SKSpriteNode {
             tex = SKTexture(imageNamed: "WaverGunPowerup");
         }
         
-        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        super.init(texture: tex, color: SKColor.clear, size: tex.size());
         xScale = scale;
         yScale = scale;
         physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2);
-        physicsBody?.dynamic = true;
+        physicsBody?.isDynamic = true;
         physicsBody?.categoryBitMask = PhysicsCategory.Powerup;
         physicsBody?.contactTestBitMask = PhysicsCategory.Player;
         physicsBody?.collisionBitMask = PhysicsCategory.None;
-        runAction(SKAction.sequence([SKAction.moveByX(-playableRect.width * 2, y: 0, duration: 6), SKAction.removeFromParent()]));
+        run(SKAction.sequence([SKAction.moveBy(x: -playableRect.width * 2, y: 0, duration: 6), SKAction.removeFromParent()]));
     }
 
     required init?(coder aDecoder: NSCoder) {

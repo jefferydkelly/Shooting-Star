@@ -11,7 +11,7 @@ import SpriteKit
 let gameFont = "8BIT WONDER";
 
 var playableRect:CGRect = CGRect(origin: CGPoint.zero, size: CGSize.zero);
-let gameTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 1.0);
+let gameTransition = SKTransition.push(with: SKTransitionDirection.right, duration: 1.0);
 
 class MainMenu: SKScene, UIGestureRecognizerDelegate {
     let titleLabel = SKLabelNode(fontNamed: gameFont);
@@ -38,83 +38,83 @@ class MainMenu: SKScene, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
-        let tap = UITapGestureRecognizer(target: self, action: "tapDetected:");
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MainMenu.tapDetected(_:)));
         tap.delegate = self;
         view.addGestureRecognizer(tap);
         
-        backgroundColor = SKColor.blackColor();
+        backgroundColor = SKColor.black;
         titleLabel.text = "Shooting Star";
         titleLabel.position = CGPoint(x: size.width / 2, y: size.height * 3 / 4);
-        titleLabel.fontColor = SKColor.whiteColor();
+        titleLabel.fontColor = SKColor.white;
         titleLabel.fontSize = standardFontSize;
         addChild(titleLabel);
         
         startButton.text = "Start Game";
         startButton.position = CGPoint(x: size.width / 2, y: size.height / 2);
-        startButton.fontColor = SKColor.whiteColor();
+        startButton.fontColor = SKColor.white;
         startButton.fontSize = standardFontSize;
         addChild(startButton);
         
         tutorialButton.text = "Tutorial";
         tutorialButton.position = CGPoint(x: size.width / 2, y: size.height * 3 / 8);
-        tutorialButton.fontColor = SKColor.whiteColor();
+        tutorialButton.fontColor = SKColor.white;
         tutorialButton.fontSize = standardFontSize;
         addChild(tutorialButton);
         
         creditsButton.text = "Credits";
-        creditsButton.position = CGPointMake(size.width / 2, size.height / 4);
-        creditsButton.fontColor = SKColor.whiteColor();
+        creditsButton.position = CGPoint(x: size.width / 2, y: size.height / 4);
+        creditsButton.fontColor = SKColor.white;
         creditsButton.fontSize = standardFontSize;
         addChild(creditsButton);
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
         
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        let touchLocation = touch.location(in: self);
+        let touchedNode = self.atPoint(touchLocation);
         
         if (touchedNode == startButton) {
-            startButton.fontColor = SKColor.redColor();
+            startButton.fontColor = SKColor.red;
         } else if (touchedNode == tutorialButton) {
-            tutorialButton.fontColor = SKColor.redColor();
+            tutorialButton.fontColor = SKColor.red;
         } else if (touchedNode == creditsButton) {
-            creditsButton.fontColor = SKColor.redColor();
+            creditsButton.fontColor = SKColor.red;
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return;
         }
-        startButton.fontColor = SKColor.whiteColor();
-        tutorialButton.fontColor = SKColor.whiteColor();
-        creditsButton.fontColor = SKColor.whiteColor();
+        startButton.fontColor = SKColor.white;
+        tutorialButton.fontColor = SKColor.white;
+        creditsButton.fontColor = SKColor.white;
 
-        let touchLocation = touch.locationInNode(self);
-        let touchedNode = self.nodeAtPoint(touchLocation);
+        let touchLocation = touch.location(in: self);
+        let touchedNode = self.atPoint(touchLocation);
         
         if (touchedNode == startButton) {
-            startButton.fontColor = SKColor.redColor();
+            startButton.fontColor = SKColor.red;
         } else if (touchedNode == tutorialButton) {
-            tutorialButton.fontColor = SKColor.redColor();
+            tutorialButton.fontColor = SKColor.red;
         } else if (touchedNode == creditsButton) {
-            creditsButton.fontColor = SKColor.redColor();
+            creditsButton.fontColor = SKColor.red;
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        startButton.fontColor = SKColor.whiteColor();
-        tutorialButton.fontColor = SKColor.whiteColor();
-        creditsButton.fontColor = SKColor.whiteColor();
+        startButton.fontColor = SKColor.white;
+        tutorialButton.fontColor = SKColor.white;
+        creditsButton.fontColor = SKColor.white;
         for touch in touches {
-            let touchLocation = touch.locationInNode(self);
-            let touchedNode = self.nodeAtPoint(touchLocation);
+            let touchLocation = touch.location(in: self);
+            let touchedNode = self.atPoint(touchLocation);
         
             if (touchedNode == startButton) {
                 let gameScene = GameScene(size: size);
@@ -130,10 +130,10 @@ class MainMenu: SKScene, UIGestureRecognizerDelegate {
     }
     
     // MARK: Gesture Handling
-    func tapDetected(sender:UITapGestureRecognizer) {
+    func tapDetected(_ sender:UITapGestureRecognizer) {
         
         
-        let tappedNode = self.nodeAtPoint(self.convertPointFromView(sender.locationOfTouch(0, inView: view!)));
+        let tappedNode = self.atPoint(self.convertPoint(fromView: sender.location(ofTouch: 0, in: view!)));
         
         if (tappedNode == startButton) {
             let gameScene = GameScene(size: size);

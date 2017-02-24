@@ -21,8 +21,8 @@ class  Ship: SKSpriteNode {
     var invincible = false {
         didSet {
             if (invincible) {
-                let fadeActions = SKAction.repeatAction(SKAction.sequence([SKAction.fadeAlphaTo(0.25, duration: 0.25), SKAction.fadeAlphaTo(1.0, duration: 0.75)]), count: invincibleTime);
-                runAction(SKAction.sequence([fadeActions, SKAction.runBlock() {
+                let fadeActions = SKAction.repeat(SKAction.sequence([SKAction.fadeAlpha(to: 0.25, duration: 0.25), SKAction.fadeAlpha(to: 1.0, duration: 0.75)]), count: invincibleTime);
+                run(SKAction.sequence([fadeActions, SKAction.run() {
                     self.invincible = false;
                     }]));
             }
@@ -31,11 +31,11 @@ class  Ship: SKSpriteNode {
     let invincibleTime = 3;
     init() {
         let tex = SKTexture(imageNamed: "Spaceship");
-        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        super.init(texture: tex, color: SKColor.clear, size: tex.size());
         xScale = 1.0 / 2.0;
         yScale = 1.0 / 2.0;
-        physicsBody = SKPhysicsBody(rectangleOfSize: size);
-        physicsBody?.dynamic = true;
+        physicsBody = SKPhysicsBody(rectangleOf: size);
+        physicsBody?.isDynamic = true;
         physicsBody?.categoryBitMask = PhysicsCategory.Player;
         physicsBody?.contactTestBitMask = PhysicsCategory.Enemy | PhysicsCategory.Powerup;
         physicsBody?.collisionBitMask = PhysicsCategory.None;
@@ -44,12 +44,12 @@ class  Ship: SKSpriteNode {
         invincible = false;
     }
 
-    func ChangeWeapon(newWeapon: BasicWeapon) {
+    func ChangeWeapon(_ newWeapon: BasicWeapon) {
         weapon = newWeapon;
         
     }
     
-    func Fire(scene:SKScene) {
+    func Fire(_ scene:SKScene) {
         weapon.Fire(scene, ship: self);
     }
     required init?(coder aDecoder: NSCoder) {

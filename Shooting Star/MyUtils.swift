@@ -13,7 +13,7 @@ func +(left: CGPoint, right:CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y);
 }
 
-func +=(inout left: CGPoint, right:CGPoint) {
+func +=(left: inout CGPoint, right:CGPoint) {
     left = left + right;
 }
 
@@ -22,7 +22,7 @@ func -(left: CGPoint, right:CGPoint) -> CGPoint {
     return CGPoint(x: left.x - right.x, y: left.y - right.y);
 }
 
-func -=(inout left: CGPoint, right:CGPoint) {
+func -=(left: inout CGPoint, right:CGPoint) {
     left = left - right;
 }
 
@@ -30,7 +30,7 @@ func *(left: CGPoint, right:CGFloat) -> CGPoint {
     return CGPoint(x: left.x * right, y: left.y * right);
 }
 
-func *=(inout left: CGPoint, right:CGFloat) {
+func *=(left: inout CGPoint, right:CGFloat) {
     left = left * right;
 }
 
@@ -38,7 +38,7 @@ func /(left: CGPoint, right:CGFloat) -> CGPoint {
     return CGPoint(x: left.x / right, y: left.y / right);
 }
 
-func /=(inout left: CGPoint, right:CGFloat) {
+func /=(left: inout CGPoint, right:CGFloat) {
     left = left / right;
 }
 
@@ -46,7 +46,7 @@ func *(left: CGPoint, right:CGPoint) -> CGPoint {
     return CGPoint(x:left.x * right.x, y:left.y * right.y);
 }
 
-func *=(inout left: CGPoint, right:CGPoint) {
+func *=(left: inout CGPoint, right:CGPoint) {
     left = left * right;
 }
 
@@ -54,17 +54,17 @@ func /(left: CGPoint, right:CGPoint) -> CGPoint {
     return CGPoint(x:left.x / right.x, y:left.y / right.y);
 }
 
-func /=(inout left: CGPoint, right:CGPoint) {
+func /=(left: inout CGPoint, right:CGPoint) {
     left = left / right;
 }
 
 let pi = CGFloat(M_PI);
 
-func radsToDeg(ang:CGFloat) -> CGFloat {
+func radsToDeg(_ ang:CGFloat) -> CGFloat {
     return ang * 180.0 / pi;
 }
 
-func degsToRad(ang:CGFloat) -> CGFloat {
+func degsToRad(_ ang:CGFloat) -> CGFloat {
     return ang * pi / 180.0;
 }
 #if !(arch(x86_64) || arch(arm64))
@@ -89,7 +89,7 @@ extension CGPoint {
         return atan2(y, x);
     }
     
-    func distance(p:CGPoint) -> CGFloat {
+    func distance(_ p:CGPoint) -> CGFloat {
         return (self - p).length();
     }
     
@@ -104,7 +104,7 @@ extension CGFloat {
         return CGFloat(Float(arc4random()) / Float(UINT32_MAX));
     }
     
-    static func random(min min: CGFloat, max:CGFloat) -> CGFloat {
+    static func random(min: CGFloat, max:CGFloat) -> CGFloat {
         return CGFloat.random() * (max - min) + min;
     }
 }

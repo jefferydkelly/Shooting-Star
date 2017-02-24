@@ -12,18 +12,18 @@ class DefaultsManager {
     static let sharedDefaultsManager = DefaultsManager();
     
     let HIGH_SCORE_KEY = "highScoreKey";
-    let defaults = NSUserDefaults.standardUserDefaults();
+    let defaults = UserDefaults.standard;
     
-    private init() {}
+    fileprivate init() {}
     
     func getHighScore() ->Int {
-        let highscore:Int? = defaults.integerForKey(HIGH_SCORE_KEY);
+        let highscore:Int? = defaults.integer(forKey: HIGH_SCORE_KEY);
         return highscore!;
     }
     
-    func setHighScore(score:Int) {
+    func setHighScore(_ score:Int) {
         if (score > getHighScore()) {
-            defaults.setInteger(score, forKey: HIGH_SCORE_KEY);
+            defaults.set(score, forKey: HIGH_SCORE_KEY);
             defaults.synchronize();
         }
     }

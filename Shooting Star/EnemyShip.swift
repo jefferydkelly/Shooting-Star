@@ -17,14 +17,14 @@ class EnemyShip: SKSpriteNode {
     init(enemyType: String, theScene:SKScene) {
         gameScene = theScene;
         let tex = SKTexture(imageNamed: enemyType);
-        super.init(texture: tex, color: SKColor.clearColor(), size: tex.size());
+        super.init(texture: tex, color: SKColor.clear, size: tex.size());
         yScale = scale;
         xScale = scale;
-        physicsBody = SKPhysicsBody(rectangleOfSize: size);
+        physicsBody = SKPhysicsBody(rectangleOf: size);
         physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         physicsBody?.contactTestBitMask = PhysicsCategory.Player | PhysicsCategory.Projectile;
         physicsBody?.collisionBitMask = PhysicsCategory.None;
-        runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.waitForDuration(1.5), SKAction.runBlock(FireAtPlayer)])));
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 1.5), SKAction.run(FireAtPlayer)])));
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -33,16 +33,16 @@ class EnemyShip: SKSpriteNode {
     
     func FireAtPlayer() {
         let bullet = SKSpriteNode(imageNamed: "bullet");
-        bullet.physicsBody = SKPhysicsBody(rectangleOfSize: bullet.size);
-        bullet.physicsBody?.dynamic = true;
+        bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size);
+        bullet.physicsBody?.isDynamic = true;
         bullet.physicsBody?.categoryBitMask = PhysicsCategory.Enemy;
         bullet.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile | PhysicsCategory.Player;
         bullet.physicsBody?.collisionBitMask = PhysicsCategory.None;
         
-        let moveAction = SKAction.moveByX(-playableRect.width, y: 0, duration: 1.5);
+        let moveAction = SKAction.moveBy(x: -playableRect.width, y: 0, duration: 1.5);
         let removeAction = SKAction.removeFromParent();
-        bullet.position = position - CGPointMake((size.width + bullet.size.width) / 2, 0);
+        bullet.position = position - CGPoint(x: (size.width + bullet.size.width) / 2, y: 0);
         gameScene.addChild(bullet);
-        bullet.runAction(SKAction.sequence([moveAction, removeAction]));
+        bullet.run(SKAction.sequence([moveAction, removeAction]));
     }
 }
